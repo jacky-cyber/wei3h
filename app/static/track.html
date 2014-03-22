@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="Chrome=1,IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <meta name=apple-mobile-web-app-capable content=yes>
+  <meta name=apple-mobile-web-app-status-bar-style content=black>
+	<link rel="stylesheet" href="/static/css/a.css" type="text/css" media="screen" charset="utf-8">
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="/static/assets/ie.css" type="text/css" media="screen" charset="utf-8">
+  <![endif]-->
+  <title>♫ When All The Stars Were Falling - Tails - Lisa Loeb - Jing</title>
+	<script type="text/javascript" src="/static/js/bundled.js"></script>
+	<script type="text/javascript" src="/static/js/playerCore23.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+	$(document).ready(function(){
+  $("#play").click(function(){
+		if($("#play").hasClass("play")) {
+			$("#play").removeClass("play").addClass("pause");
+			$('#aud').trigger("play");
+		}
+		else {
+			$("#play").removeClass("pause").addClass("play");
+			$('#aud').trigger("pause");
+		}
+  });
+});
+</script>
+</head>
+<body onresize="resize()">
+	<div id="mdCtn" class="mdCtn">
+		<div class="main">
+		  <div class="join">
+        <h1 class="logo"></h1>
+        <p class="desc">我们重新发明了搜索音乐的方式,音乐的进化与革命！</p>
+		  </div>
+      <div class="plyrCtnShdw"></div>
+      <div class="plyrCtn">
+        <div class="cvShdw"></div>
+        <image src="/static/img/inwenling.jpg" id="cover" class="cv">
+  			<div class="plyrCtt">
+
+
+				<a href="#" id="play" class="ctrlBtn play"></a>
+
+					<p class="tit">When All The Stars Were Falling</p>
+  				<p class="atst"><em class="serif">By</em>&nbsp;Lisa Loeb</p>
+  			</div>
+      </div>
+		</div>
+		<div class="">
+    </div>
+
+	</div>
+<audio id="aud" src="http://tsmusic24.tcdn.qq.com/4962953.mp3" type="audio/mp3">
+
+</audio>
+</body>
+</html>
