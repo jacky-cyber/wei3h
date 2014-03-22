@@ -14,7 +14,8 @@ def not_found(error):
 
 @app.route('/')
 def index():
-    return app.send_static_file('index.html')
+    return 'Hello World!'
+#    return app.send_static_file('index.html')
 
 # from app.users.views import mod as usersModule
 # app.register_blueprint(usersModule)
