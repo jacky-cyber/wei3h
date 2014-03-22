@@ -17,5 +17,5 @@ def index():
 #    return 'Hello World!'
     return app.send_static_file('track.html')
 
-# from app.users.views import mod as usersModule
-# app.register_blueprint(usersModule)
+from app.plr.views import mod as plrModule
+app.register_blueprint(plrModule)

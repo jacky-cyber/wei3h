@@ -8,7 +8,7 @@ DEBUG = False
 ADMINS = frozenset(['admin@admin.com'])
 SECRET_KEY = '?\xbf,\xb4\x8d\xa3"<\x9c\xb0@\x0f5\xab,w\xee\x8d$0\x13\x8b83'
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(_basedir, 'app.db')
+SQLALCHEMY_DATABASE_URI = 'mysql://root:123@localhost:3306/test?charset=utf8'
 DATABASE_CONNECT_OPTIONS = {}
 
 THREADS_PER_PAGE = 8
