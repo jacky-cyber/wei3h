@@ -23,10 +23,8 @@ def add_music():
 
         db.session.add(music)
         db.session.commit()
-        print music.getHref()
 
-        flash(music.getHref())
-        return redirect(music.getHref())
+        return redirect(url_for('plr.list_music'))
     return render_template('plr/add_music.html', form=form)
 
 @mod.route('/music/<id>/')

@@ -17,8 +17,5 @@ class Music(db.Model):
         self.music_pic = music_pic
         self.music_audio = music_audio
 
-    def getHref(self):
-        return 'http://127.0.0.1:5000/plr/music/' + str(self.id)
-
     def __repr__(self):
         return '<Music %r>' % self.music_title
