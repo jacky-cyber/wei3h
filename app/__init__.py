@@ -15,7 +15,10 @@ def not_found(error):
 @app.route('/')
 def index():
 #    return 'Hello World!'
-    return app.send_static_file('pure.html')
+    return app.send_static_file('2048.html')
 
 from app.plr.views import mod as plrModule
 app.register_blueprint(plrModule)
+
+from app.games.views import mod as gamesModule
+app.register_blueprint(gamesModule)

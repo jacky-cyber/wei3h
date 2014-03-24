@@ -9,6 +9,7 @@ from app.plr.models import Music
 mod = Blueprint('plr', __name__, url_prefix='/plr')
 
 @mod.route('/index/')
+@mod.route('/')
 def index():
     return render_template('plr/index.html')
 
