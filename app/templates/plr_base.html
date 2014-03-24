@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example with a side menu that hides on mobile, just like the Pure website.">
+
+    <title>&#64;zaiwenling</title>
+
+    <link rel="stylesheet" href="/static/css/pure-min.css">
+
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="/static/css/side-menu-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="/static/css/side-menu.css">
+    <!--<![endif]-->
+</head>
+<body>
+
+    <div id="layout">
+    <!-- Menu toggle -->
+        <a href="#menu" id="menuLink" class="menu-link">
+        <!-- Hamburger icon -->
+            <span></span>
+        </a>
+
+        <div id="menu">
+            <div class="pure-menu pure-menu-open">
+                <a class="pure-menu-heading" href="#">在温岭</a>
+
+                <ul>
+                    <li class="menu-item-divided">
+                        <a href="{{ url_for('plr.index') }}">首页</a>
+                    </li>
+
+                    <li class="menu-item-divided">
+                        <a href="#">今日新闻</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url_for('plr.list_music') }}">音乐推荐</a>
+                    </li>
+
+                    <li>
+                        <a href="#">时尚潮流</a>
+                    </li>
+
+                    <li>
+                        <a href="http://m.autohome.com.cn/" target="_blank">汽车资讯</a>
+                    </li>
+
+                    <li class="menu-item-divided">
+                        <a href="#">2048</a>
+                    </li>
+
+                    <li class="menu-item-divided">
+                        <a href="http://m.mtime.cn/">电影资讯</a>
+                    </li>
+
+                    <li>
+                        <a href="http://qiushibaike.com">糗事百科</a>
+                    </li>
+
+                    <li>
+                        <a href="#">外卖信息</a>
+                    </li>
+
+                    <li>
+                        <a href="#">招聘求职</a>
+                    </li>
+
+                    <li class="menu-item-divided">
+                        <a href="#">关于我们</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="main">
+
+            {% block header %}
+            {% endblock %}
+
+            {% block content %}
+            {% endblock %}
+
+
+        </div>
+    </div>
+
+
+
+    <script src="/static/js/ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+{% extends "plr_base.html" %}
+
+{% block header %}
+
+<div class="header">
+	<h1>在温岭</h1>
+	<p>让我们用音乐倾听彼此。</p>
+</div>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="content">
+
+	<p></p>
+
+
+	<table class="pure-table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>歌曲标题</th>
+				<th>歌手</th>
+			</tr>
+		</thead>
+
+		<tbody>
+		{% for music in musics %}
+			<tr>
+				<td>{{ loop.index }}</td>
+				<td><a href="{{ url_for('plr.get_music', id=music.id) }}">{{ music.music_title }}</a></td>
+				<td>{{ music.music_artist }}</td>
+			</tr>
+		{% endfor %}
+
+		</tbody>
+	</table>
+
+</div>
+
+
+{% endblock %}

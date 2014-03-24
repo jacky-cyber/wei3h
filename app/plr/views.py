@@ -8,6 +8,9 @@ from app.plr.models import Music
 
 mod = Blueprint('plr', __name__, url_prefix='/plr')
 
+@mod.route('/index/')
+def index():
+    return render_template('plr/index.html')
 
 @mod.route('/addmusic/', methods=['GET', 'POST'])
 def add_music():
@@ -29,3 +32,8 @@ def add_music():
 def get_music(id):
     music = Music.query.filter_by(id=id).first()
     return render_template('plr/music.html', music=music)
+
+@mod.route('/musics/')
+def list_music():
+    musics = Music.query.all()
+    return render_template('plr/musics.html', musics=musics)

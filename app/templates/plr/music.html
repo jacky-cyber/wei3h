@@ -7,11 +7,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
   <meta name=apple-mobile-web-app-capable content=yes>
   <meta name=apple-mobile-web-app-status-bar-style content=black>
-	<link rel="stylesheet" href="/static/css/a.css" type="text/css" media="screen" charset="utf-8">
+	<link rel="stylesheet" href="/static/css/music.css" type="text/css" media="screen" charset="utf-8">
   <!--[if lte IE 8]>
   <link rel="stylesheet" href="/static/assets/ie.css" type="text/css" media="screen" charset="utf-8">
   <![endif]-->
-  <title>♫ {{ music.music_title }} - {{ music.music_artist }} </title>
+  <title>&#9836; {{ music.music_title }} &ndash; {{ music.music_artist }} </title>
 	<script type="text/javascript" src="/static/js/bundled.js"></script>
 	<script type="text/javascript" src="/static/js/playerCore23.js"></script>
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -44,7 +44,7 @@
   			<div class="plyrCtt">
 
 
-				<a href="#" id="play" class="ctrlBtn play"></a>
+				<p id="play" class="ctrlBtn play"></p>
 
 					<p class="tit">{{ music.music_title }}</p>
   				<p class="atst"><em class="serif">By</em>&nbsp;{{ music.music_artist }}</p>

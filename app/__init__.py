@@ -15,7 +15,7 @@ def not_found(error):
 @app.route('/')
 def index():
 #    return 'Hello World!'
-    return app.send_static_file('track.html')
+    return app.send_static_file('pure.html')
 
 from app.plr.views import mod as plrModule
 app.register_blueprint(plrModule)
