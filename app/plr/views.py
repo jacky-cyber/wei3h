@@ -8,6 +8,11 @@ from app.plr.models import Music
 
 mod = Blueprint('plr', __name__, url_prefix='/plr')
 
+
+import pymongo
+conn = pymongo.Connection('localhost', 5430)
+db = conn.test
+
 @mod.route('/index/')
 @mod.route('/')
 def index():
@@ -36,3 +41,23 @@ def get_music(id):
 def list_music():
     musics = Music.query.all()
     return render_template('plr/musics.html', musics=musics)
+
+@mod.route('/waimai/<id>/')
+def get_waimai(id):
+    from bson.objectid import ObjectId
+    waimai = db.waimai.find_one({'_id': ObjectId(id)}, {'_id': 0})
+    return render_template('plr/waimai.html', waimai=waimai)
+
+@mod.route('/waimais/')
+def list_waimai():
+    waimais = []
+    for i in db.waimai.find():
+        id = str(i['_id'])
+        del i['_id']
+        i['objid'] = id
+
+        waimais.append(i)
+
+    return render_template('plr/waimais.html', waimais=waimais)
+
+

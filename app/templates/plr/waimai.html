@@ -1,0 +1,62 @@
+{% extends "plr_base.html" %}
+
+{% block header %}
+
+<div class="header">
+	{{ waimai.name }}
+	<p style="font-size:smaller;"> -- {{ waimai.tag }}</p>
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="content">
+
+        <div>
+
+        
+        <table class="pure-table pure-table-bordered" >
+        	<tbody>
+        		<tr><td>地址</td><td>{{ waimai.address }}</td></tr>
+        		<tr><td>外卖热线</td><td>{{ waimai.phone }}</td></tr>
+        		<tr><td>营业时间</td><td>{{ waimai.ttime }}</td></tr>
+        	</tbody>
+        </table>
+        </div>
+        <div>
+        {% for k, v in waimai.products.items() %}
+        <p></p>
+        	<div><h4>{{ k }}</h4>
+        	<p></p>
+        	<table class="pure-table pure-table-bordered" >
+        				<thead>
+			<tr>
+
+				<th>菜名</th>
+				<th>价格</th>
+			</tr>
+		</thead><tbody>
+        	{% for vv in v %}
+
+
+        		{% for kkk, vvv in vv.items() %}
+        		<tr>
+
+        			<td>{{ kkk }}</td>
+        			<td>{{ vvv }}</td>
+        		</tr>
+        			{% endfor %}
+
+	 		{% endfor %}
+</tbody></table></div>
+        {% endfor %}
+        	<p style="font-size:smaller;">
+        		{{ waimai.beiz }}
+        	</p>
+
+        </div>
+
+    </div>
+
+{% endblock %}
