@@ -1,4 +1,4 @@
-{% extends "plr_base.html" %}
+{% extends "zaiwenling_base.html" %}
 
 {% block header %}
 
@@ -30,7 +30,7 @@
 		{% for music in musics %}
 			<tr>
 				<td>{{ loop.index }}</td>
-				<td><a href="{{ url_for('plr.get_music', id=music.id) }}">{{ music.music_title }}</a></td>
+				<td><a href="{{ url_for('zaiwenling.get_music', id=music.id) }}">{{ music.music_title }}</a></td>
 				<td>{{ music.music_artist }}</td>
 			</tr>
 		{% endfor %}

@@ -4,7 +4,7 @@ from app import db
 
 class Music(db.Model):
 
-    __tablename__ = 'plr_music'
+    __tablename__ = 'zaiwenling_music'
     id = db.Column(db.Integer, primary_key=True)
     music_title = db.Column(db.String(50))
     music_artist = db.Column(db.String(50))

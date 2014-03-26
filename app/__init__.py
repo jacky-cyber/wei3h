@@ -17,8 +17,8 @@ def index():
 #    return 'Hello World!'
     return app.send_static_file('2048.html')
 
-from app.plr.views import mod as plrModule
-app.register_blueprint(plrModule)
+from app.zaiwenling.views import mod as zaiwenlingModule
+app.register_blueprint(zaiwenlingModule)
 
 from app.games.views import mod as gamesModule
 app.register_blueprint(gamesModule)

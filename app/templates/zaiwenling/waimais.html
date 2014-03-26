@@ -1,4 +1,4 @@
-{% extends "plr_base.html" %}
+{% extends "zaiwenling_base.html" %}
 
 {% block header %}
 
@@ -29,7 +29,7 @@
 		<tbody>
 		{% for waimai in waimais %}
 			<tr>
-				<td><a href="{{ url_for('plr.get_waimai', id=waimai.objid) }}">{{ waimai.name }}</a></td>
+				<td><a href="{{ url_for('zaiwenling.get_waimai', id=waimai.objid) }}">{{ waimai.name }}</a></td>
 				<td>{{ waimai.address }}</td>
 				<td>{{ waimai.phone }}</td>
 			</tr>
