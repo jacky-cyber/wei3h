@@ -22,7 +22,6 @@ def index():
 def add_music():
     form = MusicForm(request.form)
     if form.validate_on_submit():
-        print form.music_pic.data
 
         music = Music(music_title=form.music_title.data, music_artist=form.music_artist.data, music_pic=form.music_pic.data, music_audio=form.music_audio.data)
 
@@ -59,5 +58,13 @@ def list_waimai():
         waimais.append(i)
 
     return render_template('zaiwenling/waimais.html', waimais=waimais)
+
+@mod.route('/about/')
+def about():
+    return render_template('zaiwenling/about.html')
+
+@mod.route('/bd/')
+def bd():
+    return render_template('zaiwenling/bd.html')
 
 

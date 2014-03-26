@@ -2,6 +2,8 @@
 
 from app import db
 
+from datetime import datetime
+
 class Music(db.Model):
 
     __tablename__ = 'zaiwenling_music'
@@ -19,3 +21,11 @@ class Music(db.Model):
 
     def __repr__(self):
         return '<Music %r>' % self.music_title
+
+
+
+
+
+
+
+
