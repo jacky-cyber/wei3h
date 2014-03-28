@@ -10,6 +10,7 @@ mod = Blueprint('zaiwenling', __name__, url_prefix='/zaiwenling')
 
 
 import pymongo
+from bson.objectid import ObjectId
 conn = pymongo.Connection('localhost', 5430)
 db = conn.test
 
@@ -43,7 +44,6 @@ def list_music():
 
 @mod.route('/waimai/<id>/')
 def get_waimai(id):
-    from bson.objectid import ObjectId
     waimai = db.waimai.find_one({'_id': ObjectId(id)}, {'_id': 0})
     return render_template('zaiwenling/waimai.html', waimai=waimai)
 
@@ -58,6 +58,30 @@ def list_waimai():
         waimais.append(i)
 
     return render_template('zaiwenling/waimais.html', waimais=waimais)
+
+@mod.route('/editwaimai/<id>/')
+def edit_waimai(id=''):
+    waimai = db.waimai.find_one({'_id': ObjectId(id)})
+
+    return render_template('zaiwenling/editwaimai.html', waimai=waimai)
+
+@mod.route('/updatewaimai/', methods=['POST'])
+def update_waimai():
+    form = request.form
+    id = form['_id']
+    name = form['name']
+    phone = form['phone']
+    rate = form['rate']
+    tag = form['tag']
+    address = form['address']
+    ttime = form['ttime']
+    valid = form['valid']
+    beiz = form['beiz']
+    db.waimai.update({'_id': ObjectId(id)}, {'$set': {'name': name, \
+        'phone': phone, 'rate': rate, 'tag': tag, \
+        'address': address, 'ttime': ttime, 'valid': valid, \
+        'beiz': beiz}})
+    return redirect(url_for('zaiwenling.get_waimai', id=str(id)))
 
 @mod.route('/about/')
 def about():

@@ -1,0 +1,15 @@
+
+
+<form method="post" action="{{ url_for('zaiwenling.update_waimai') }}">
+<label>id</label><input type="text" name="_id" value="{{ waimai._id }}"><br>
+<label>name</label><input type="text" name="name" value="{{ waimai.name }}"><br>
+<label>point</label><input type="text" name="point" value="{{ waimai.point }}"><br>
+<label>phone</label><input type="text" name="phone" value="{{ waimai.phone }}"><br>
+<label>rate</label><input type="text" name="rate" value="{{ waimai.rate }}"><br>
+<label>tag</label><input type="text" name="tag" value="{{ waimai.tag }}"><br>
+<label>address</label><input type="text" name="address" value="{{ waimai.address }}"><br>
+<label>ttime</label><input type="text" name="ttime" value="{{ waimai.ttime }}"><br>
+<label>valid</label><input type="text" name="valid" value="{{ waimai.valid }}"><br>
+<label>beiz</label><input type="text" name="beiz" value="{{ waimai.beiz }}"><br>
+<input type="submit" value="edit">
+</form>
