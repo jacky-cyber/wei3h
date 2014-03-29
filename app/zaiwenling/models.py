@@ -2,7 +2,6 @@
 
 from app import db
 
-from datetime import datetime
 
 class Music(db.Model):
 

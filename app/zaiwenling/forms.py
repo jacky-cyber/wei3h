@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from flask.ext.wtf import Form, RecaptchaField
-from wtforms import TextField, PasswordField, BooleanField
-from wtforms.validators import Required, EqualTo, Email
+from flask.ext.wtf import Form
+from wtforms import TextField, PasswordField
+from wtforms.validators import Required
 
 class MusicForm(Form):
     music_title = TextField('title', [Required()])
