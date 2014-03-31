@@ -1,66 +1,63 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for
-from werkzeug import check_password_hash, generate_password_hash
+from flask import Blueprint, request, make_response, render_template, flash, g, session, redirect, url_for
 from app import db
 
-from app.wechat.models import User
-from app.wechat.forms import LoginForm, RegisterForm
-from app.wechat.decorators import requires_login
+from app.wechat.models import Wxuser
+from app.wechat.forms import AddWxuserForm
 
-import time
+
+
+from ..wpi.api import *
+
 
 mod = Blueprint('wechat', __name__, url_prefix='/wechat')
 
-@mod.route('/home/')
-@requires_login
-def home():
-    return g.user.phone + '<a href="/wechat/logout/">logout</a>'
+@mod.route('/home/<token>')
+def home(token):
+    return token
 
-@mod.before_request
-def before_request():
-    g.user = None
-    if 'user' in session:
-        g.user = User.query.get(session['user'])
+@mod.route('/addwechat/', methods=['GET', 'POST'])
+def add_wechat():
+    form = AddWxuserForm(request.form)
 
-@mod.route('/login/', methods=['GET', 'POST'])
-def login():
-    form = LoginForm(request.form)
+
     if form.validate_on_submit():
-        user = User.query.filter_by(phone=form.phone.data).first()
-        if user and check_password_hash(user.password, form.password.data):
-            session['user'] = user.id
-            flash('Welcome %s' % user.nickname)
-            return redirect(url_for('wechat.home'))
-        flash('Wrong email or password', 'error-message')
-    return render_template('wechat/login.html', form=form)
 
-@mod.route('/logout/')
-def logout():
-    session.pop('user', None)
-    return redirect(url_for('wechat.login'))
+        wxuser = Wxuser(wxname=form.wxname.data, \
+            wxid=form.wxid.data, weixin=form.weixin.data, \
+            headerpic=form.headerpic.data, typeid=form.typeid.data, \
+            appid=form.appid.data, appsecret=form.appsecret.data
+            )
 
-@mod.route('/register/', methods=['GET', 'POST'])
-def register():
-    form = RegisterForm(request.form)
-    t = int(time.time())
-    if form.validate_on_submit():
-        user = User(phone=form.phone.data, \
-            password=generate_password_hash(form.password.data), \
-            nickname=form.nickname.data, createtime=t, \
-            lastlogintime=t, lastloginip=request.remote_addr)
 
-        db.session.add(user)
+        db.session.add(wxuser)
         db.session.commit()
 
-        session['user'] = user.id
 
-        flash('Thanks for registering')
-        return redirect(url_for('wechat.home'))
-    return render_template('wechat/register.html', form=form)
+        flash('Thanks for registering ' + wxuser.getToken())
+        return redirect(url_for('wechat.home', token=wxuser.getToken()))
+    return render_template('wechat/add_wechat.html', form=form)
 
+@mod.route('/api/<token>', methods=['GET', 'POST'])
+def wechat_api(token):
 
+    if request.method == 'GET':
+        query = request.args
 
+        return checkSignature(query, token)
+
+    if request.method == 'POST':
+        message = getMessage(request.data)
+        print message
+
+        ToUserName = message['ToUserName']
+        FromUserName = message['FromUserName']
+
+        r = reply('text', '朱峰', ToUserName, FromUserName)
+        response = make_response(r)
+        response.content_type = 'application/xml'
+        return response
 
 
 

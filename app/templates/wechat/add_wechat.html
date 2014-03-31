@@ -1,0 +1,14 @@
+
+
+    <form method="POST" action="{{ url_for('wechat.add_wechat') }}" class="form">
+      {{ form.csrf_token }}
+      {{ form.wxname }}
+      {{ form.wxid }}
+      {{ form.weixin }}
+      {{ form.headerpic }}
+      {{ form.typeid }}
+      {{ form.appid }}
+      {{ form.appsecret }}
+      <input type="submit" value="Add" class="button green">
+    </form>
+

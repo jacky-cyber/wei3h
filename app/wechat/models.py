@@ -2,30 +2,49 @@
 
 from app import db
 
-class User(db.Model):
+import hashlib
+import time
 
-    __tablename__ = 'wechat_user'
+class Wxuser(db.Model):
+
+    __tablename__ = 'wechat_wxuser'
     id = db.Column(db.Integer, primary_key=True)
-    phone = db.Column(db.String(11), unique=True)
-    password = db.Column(db.String(120))
-    nickname = db.Column(db.String(20), unique=True)
+    wxname = db.Column(db.String(20))
+    wxid = db.Column(db.String(20), unique=True)
+    weixin = db.Column(db.String(20))
+    headerpic = db.Column(db.String(255))
+    token = db.Column(db.String(32))
+    typeid = db.Column(db.Integer)
+
+    appid = db.Column(db.String(32))
+    appsecret = db.Column(db.String(32))
 
     createtime = db.Column(db.BigInteger)
-    lastlogintime = db.Column(db.BigInteger)
-    lastloginip = db.Column(db.String(20))
+    deadtime = db.Column(db.BigInteger) # createtime + 86400
 
-    def __init__(self, phone=None, password=None, nickname=None, \
-        createtime=None, lastlogintime=None, lastloginip=None):
-        self.phone = phone
-        self.password = password
-        self.nickname = nickname
 
-        self.createtime = createtime
-        self.lastlogintime = lastlogintime
-        self.lastloginip = lastloginip
+    def __init__(self, wxname=None, wxid=None, weixin=None, \
+        headerpic=None, typeid=0, appid='', appsecret=''):
+        self.wxname = wxname
+        self.wxid = wxid
+        self.weixin = weixin
+        self.headerpic = headerpic
+        self.token = hashlib.md5(wxid+'zhufeng').hexdigest()
+        self.typeid = typeid
+
+        self.appid = appid
+        self.appsecret = appsecret
+
+        t = int(time.time())
+        self.createtime = t
+        self.deadtime = t + 86400
+
+    def getToken(self):
+        return self.token
+
 
     def __repr__(self):
-        return '<User %>' % self.phone
+        return '<Wxuser %>' % self.wxname
 
 
 

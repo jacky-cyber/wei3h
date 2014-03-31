@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 
 from flask.ext.wtf import Form
-from wtforms import TextField, PasswordField, BooleanField
-from wtforms.validators import Required, EqualTo
+from wtforms import TextField, SelectField
+from wtforms.validators import Required
 
-class LoginForm(Form):
-    phone = TextField(u'手机号码', [Required()])
-    password = PasswordField(u'密码', [Required()])
+class AddWxuserForm(Form):
+    wxname = TextField(u'公众号名称', [Required()])
+    wxid = TextField(u'公众号原始id', [Required()])
+    weixin = TextField(u'微信号', [Required()])
+    headerpic = TextField(u'头像地址')
+    typeid = SelectField(u'账号类型', coerce=int, choices=[(0, u'订阅号'), (1, u'服务号')])
 
-class RegisterForm(Form):
-    phone = TextField(u'登录手机号码', [Required()])
-    password = PasswordField(u'密码', [Required()])
-    confirm = PasswordField(u'确认密码', [
-        Required(),
-        EqualTo('password', message = 'Passwords must match')
-        ])
-    nickname = TextField(u'昵称', [Required()])
+    appid = TextField('AppID')
+    appsecret = TextField('AppSecret')
+
+
