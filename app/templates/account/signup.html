@@ -1,0 +1,12 @@
+
+
+    <form method="POST" action="{{ url_for('account.signup') }}" class="form">
+      {{ form.csrf_token }}
+      {{ form.phone }}
+      {{ form.password }}
+      {{ form.confirm }}
+      {{ form.nickname }}
+
+      <input type="submit" value="signup" class="button green">
+    </form>
+

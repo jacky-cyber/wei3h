@@ -6,7 +6,10 @@ _basedir = os.path.abspath(os.path.dirname(__file__))
 DEBUG = False
 
 ADMINS = frozenset(['zhufeng9282@163.com'])
-SECRET_KEY = '+\xfb\x14r\xfb\xacV\x8a\x98`\x8f\xdb\x9c\xdc\x7f\xe1\x97\x9d\xd3~q5\xea\x82'
+
+# base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes)
+SECRET_KEY = 'uyGpSjgfS4+KdfIj1u4LKxUqe0WS7UuArpM3r8dzJQA='
+PASSWORD_SECRET = 'aJJOvVwnT72ywBbRtiCMfbXXQeKIj0tqiT6s4jKtyOg='
 
 SQLALCHEMY_DATABASE_URI = 'mysql://root:123@localhost:3306/test?charset=utf8'
 DATABASE_CONNECT_OPTIONS = {}
@@ -14,7 +17,7 @@ DATABASE_CONNECT_OPTIONS = {}
 THREADS_PER_PAGE = 8
 
 CSRF_ENABLED = True
-CSRF_SESSION_KEY = 'Ow(hV\x90\xb2\x0fhU$9H\xd9\x9ap\xe0\x0b\xea>\x16\x08{\xd9'
+CSRF_SESSION_KEY = 'iggAEy3qSZ6EV/8EuJg7Dr/yYnmgfU+ykAG/qRzirug='
 
 RECAPTCHA_USE_SSL = False
 RECAPTCHA_PUBLIC_KEY = '6LeYIbsSAAAAACRPIllxA7wvXjIE411PfdB2gt2J'

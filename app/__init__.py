@@ -22,6 +22,9 @@ def index():
 from app.zaiwenling.views import mod as zaiwenlingModule
 app.register_blueprint(zaiwenlingModule)
 
+from app.account.views import mod as accountModule
+app.register_blueprint(accountModule)
+
 from app.wechat.views import mod as wechatModule
 app.register_blueprint(wechatModule)
 
