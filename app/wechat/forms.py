@@ -4,6 +4,8 @@ from flask.ext.wtf import Form
 from wtforms import TextField, SelectField
 from wtforms.validators import Required
 
+from app.wechat.models import Wxuser
+
 class AddWxuserForm(Form):
     wxname = TextField(u'公众号名称', [Required()])
     wxid = TextField(u'公众号原始id', [Required()])
@@ -13,5 +15,10 @@ class AddWxuserForm(Form):
 
     appid = TextField('AppID')
     appsecret = TextField('AppSecret')
+
+    def save(self):
+        wxuser = Wxuser(**self.data)
+        wxuser.save()
+        return wxuser
 
 

@@ -24,16 +24,7 @@ def add_wechat():
 
     if form.validate_on_submit():
 
-        wxuser = Wxuser(wxname=form.wxname.data, \
-            wxid=form.wxid.data, weixin=form.weixin.data, \
-            headerpic=form.headerpic.data, typeid=form.typeid.data, \
-            appid=form.appid.data, appsecret=form.appsecret.data
-            )
-
-
-        db.session.add(wxuser)
-        db.session.commit()
-
+        wxuser = form.save()
 
         flash('Thanks for registering ' + wxuser.getToken())
         return redirect(url_for('wechat.home', token=wxuser.getToken()))

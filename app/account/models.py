@@ -16,7 +16,7 @@ class Account(db.Model):
 
     role = db.Column(db.String(10), default='user')
 
-    created = db.Column(db.DateTime, default=datetime.utcnow)
+    created = db.Column(db.DateTime, default=datetime.now)
     token = db.Column(db.String(20))
 
     def __init__(self, **kwargs):

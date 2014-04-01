@@ -2,10 +2,10 @@
 
     <form method="POST" action="{{ url_for('account.signup') }}" class="form">
       {{ form.csrf_token }}
-      {{ form.phone }}
-      {{ form.password }}
-      {{ form.confirm }}
-      {{ form.nickname }}
+      <div>{{ form.phone.label }}{{ form.phone }}</div>
+      <div>{{ form.password.label }}{{ form.password }}</div>
+      <div>{{ form.confirm.label }}{{ form.confirm }}</div>
+      <div>{{ form.nickname.label }}{{ form.nickname }}</div>
 
       <input type="submit" value="signup" class="button green">
     </form>

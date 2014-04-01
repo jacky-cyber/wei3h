@@ -1,1 +1,22 @@
 {{ g.user.phone }}
+<a href="/account/signout/">logout</a>
+
+<div>
+
+
+
+    <form method="POST" action="{{ url_for('wechat.add_wechat') }}" class="form">
+      {{ form.csrf_token }}
+      <div>{{ form.wxname.label }}{{ form.wxname }}</div>
+      <div>{{ form.wxid.label }}{{ form.wxid }}</div>
+      <div>{{ form.weixin.label }}{{ form.weixin }}</div>
+      <div>{{ form.headerpic.label }}{{ form.headerpic }}</div>
+      <div>{{ form.typeid.label }}{{ form.typeid }}</div>
+      <div>{{ form.appid.label }}{{ form.appid }}</div>
+      <div>{{ form.appsecret.label }}{{ form.appsecret }}</div>
+      <input type="submit" value="Add" class="button green">
+    </form>
+
+
+
+</div>
