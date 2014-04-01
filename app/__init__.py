@@ -28,5 +28,8 @@ app.register_blueprint(accountModule)
 from app.wechat.views import mod as wechatModule
 app.register_blueprint(wechatModule)
 
+from app.dashboard.views import mod as dashboardModule
+app.register_blueprint(dashboardModule)
+
 from app.games.views import mod as gamesModule
 app.register_blueprint(gamesModule)

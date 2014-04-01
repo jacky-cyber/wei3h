@@ -18,7 +18,7 @@ def home():
 
 @mod.route('/signup/', methods=['POST', 'GET'])
 def signup():
-    next_url = request.args.get('next', '/account/home')
+    next_url = request.args.get('next', url_for('dashboard.index'))
     form = SignupForm()
     if form.validate_on_submit():
         user = form.save()
@@ -29,7 +29,7 @@ def signup():
 
 @mod.route('/signin/', methods=['GET', 'POST'])
 def signin():
-    next_url = request.args.get('next', '/account/home')
+    next_url = request.args.get('next', url_for('dashboard.index'))
     if g.user:
         return redirect(next_url)
     form = SigninForm()
