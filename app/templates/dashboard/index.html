@@ -1,62 +1,119 @@
-{{ g.user.phone }}
-<a href="/account/signout/">logout</a>
 
-<div>
-  <p>my wxusers</p>
-  <table>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>选择公众账号</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="/static/css/doc.min.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">{{ g.user.nickname }}</a></li>
+          <li><a href="#">帮助</a></li>
+          <li><a href="{{ url_for('account.signout') }}">退出</a></li>
+        </ul>
+        <h3 class="text-muted">Wei3h</h3>
+      </div>
+
+      <div class="jumbotron">
+        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+      </div>
+
+      <div class="row marketing">
+
+      <div class="bs-callout bs-callout-info">
+    <h4>header</h4>
+    <p>ppp</p>
+
+
+  </div>
+
+
+  <div class="table-responsive">
+  <table class="table">
     <thead>
       <tr>
-        <th>id</th>
-        <th>wxname</th>
-        <th>wxid</th>
-        <th>weixin</th>
-        <th>headerpic</th>
-        <th>token</th>
-        <th>typeid</th>
-        <th>appid</th>
-        <th>appsecret</th>
-        <th>created</th>
-        <th>deadtime</th>
+        <th>#</th>
+        <th>公众号名称</th>
+        <th>创建时间  /  到期时间</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody>
       {% for wxuser in wxusers %}
-      <tr>
-        <th>{{ wxuser.id }}</th>
-        <th>{{ wxuser.wxname }}</th>
-        <th>{{ wxuser.wxid }}</th>
-        <th>{{ wxuser.weixin }}</th>
-        <th>{{ wxuser.headerpic }}</th>
-        <th>{{ wxuser.token }}</th>
-        <th>{{ wxuser.typeid }}</th>
-        <th>{{ wxuser.appid }}</th>
-        <th>{{ wxuser.appsecret }}</th>
-        <th>{{ wxuser.created }}</th>
-        <th>{{ wxuser.deadtime }}</th>
-      </tr>
+        <tr>
+          <th>{{ loop.index }}</th>
+          <th>{{ wxuser.wxname }}</th>
+          <th>{{ wxuser.created }} / {{ wxuser.deadtime }}</th>
+          <th>
+            <a href="#">编辑</a> |
+            <a href="#">删除</a>
+            <a href="#" class="btn-sm btn-primary">功能管理</a>
+            <button href="#" class="btn-sm btn-primary" data-toggle="modal" data-target="#myModal{{ wxuser.id }}">API接口</button>
+
+
+          </th>
+        </tr>
+
+                    <div class="modal fade" id="myModal{{ wxuser.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">{{ wxuser.wxname }}</h4>
+      </div>
+      <div class="modal-body">
+        <p>URL http://wei3h.com/zaiwenling/api/{{ wxuser.token }}</p>
+        <p>Token {{ wxuser.token }}</p>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
       {% endfor %}
     </tbody>
   </table>
-
-
 </div>
 
-<div>
-
-<p>add wxuser</p>
-
-    <form method="POST" action="{{ url_for('wechat.add_wechat') }}" class="form">
-      {{ form.csrf_token }}
-      <div>{{ form.wxname.label }}{{ form.wxname }}</div>
-      <div>{{ form.wxid.label }}{{ form.wxid }}</div>
-      <div>{{ form.weixin.label }}{{ form.weixin }}</div>
-      <div>{{ form.headerpic.label }}{{ form.headerpic }}</div>
-      <div>{{ form.typeid.label }}{{ form.typeid }}</div>
-      <div>{{ form.appid.label }}{{ form.appid }}</div>
-      <div>{{ form.appsecret.label }}{{ form.appsecret }}</div>
-      <input type="submit" value="Add" class="button green">
-    </form>
 
 
 
-</div>
+      <div class="footer">
+        <p>&copy; Wei3h.Inc 2014</p>
+      </div>
+
+    </div> <!-- /container -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>
