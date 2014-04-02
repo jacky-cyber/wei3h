@@ -2,8 +2,48 @@
 <a href="/account/signout/">logout</a>
 
 <div>
+  <p>my wxusers</p>
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>wxname</th>
+        <th>wxid</th>
+        <th>weixin</th>
+        <th>headerpic</th>
+        <th>token</th>
+        <th>typeid</th>
+        <th>appid</th>
+        <th>appsecret</th>
+        <th>created</th>
+        <th>deadtime</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for wxuser in wxusers %}
+      <tr>
+        <th>{{ wxuser.id }}</th>
+        <th>{{ wxuser.wxname }}</th>
+        <th>{{ wxuser.wxid }}</th>
+        <th>{{ wxuser.weixin }}</th>
+        <th>{{ wxuser.headerpic }}</th>
+        <th>{{ wxuser.token }}</th>
+        <th>{{ wxuser.typeid }}</th>
+        <th>{{ wxuser.appid }}</th>
+        <th>{{ wxuser.appsecret }}</th>
+        <th>{{ wxuser.created }}</th>
+        <th>{{ wxuser.deadtime }}</th>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
 
+</div>
+
+<div>
+
+<p>add wxuser</p>
 
     <form method="POST" action="{{ url_for('wechat.add_wechat') }}" class="form">
       {{ form.csrf_token }}

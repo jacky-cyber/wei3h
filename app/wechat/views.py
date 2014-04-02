@@ -7,11 +7,15 @@ from app.wechat.models import Wxuser
 from app.wechat.forms import AddWxuserForm
 
 
-
+from ..utils.user import get_current_user
 from ..wpi.api import *
 
 
 mod = Blueprint('wechat', __name__, url_prefix='/wechat')
+
+@mod.before_request
+def before_request():
+    g.user = get_current_user()
 
 @mod.route('/home/<token>')
 def home(token):

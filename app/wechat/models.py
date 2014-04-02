@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from app import db
+from app.account.models import Account
 
+from flask import g
 import hashlib
 import datetime
 
@@ -35,6 +37,9 @@ class Wxuser(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+
+        aw = AccountAndWxuser(wxuser_id=self.id)
+        aw.save()
         return self
 
     def getToken(self):
@@ -44,7 +49,23 @@ class Wxuser(db.Model):
     def __repr__(self):
         return '<Wxuser %>' % self.wxname
 
+class AccountAndWxuser(db.Model):
 
+    __tablename__ = 'rel_account_wxuser'
+    id = db.Column(db.Integer, primary_key=True)
+    account_id = db.Column(db.Integer, nullable=False, index=True)
+    wxuser_id = db.Column(db.Integer, nullable=False, index=True)
+    role = db.Column(db.String(10), default='staff')
+
+    def __init__(self, **kwargs):
+        self.account_id = g.user.id
+
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
 
 
