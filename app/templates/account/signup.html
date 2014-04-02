@@ -1,12 +1,90 @@
 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <form method="POST" action="{{ url_for('account.signup') }}" class="form">
-      {{ form.csrf_token }}
-      <div>{{ form.phone.label }}{{ form.phone }}</div>
-      <div>{{ form.password.label }}{{ form.password }}</div>
-      <div>{{ form.confirm.label }}{{ form.confirm }}</div>
-      <div>{{ form.nickname.label }}{{ form.nickname }}</div>
+    <title>注册</title>
 
-      <input type="submit" value="signup" class="button green">
-    </form>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/signin.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+<div class="container">
+    <div class="content" role="main">
+        <div class="app" style="min-height: 640px">
+            <div class="app-init-container"><div class="account-login"><div class="wrapper-app">
+    <div class="container-app">
+        <div class="header-app" id="header">
+            <h1 class="title">Wei3h</h1>
+            <h2 class="title">( <a class="find-pass-link" href="/account/signin">登录</a> - <a href="/" class="new-window">返回首页</a> )</h2>
+        </div>
+        <div class="form-app">
+            <form class="login-form center-form" role="form" method="post" action="{{ url_for('account.signup') }}">
+                {{ form.csrf_token }}
+                <fieldset>
+                    <div class="control-group">
+                        <label class="control-label">登录手机号：</label>
+                        <input class="account" type="text" placeholder="输入手机号码" name="phone" value="">
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">登录密码：</label>
+                        <input class="password" type="password" placeholder="你的登录密码" name="password" value="">
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">确认密码：</label>
+                        <input class="password" type="password" placeholder="你的登录密码" name="confirm" value="">
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">设定昵称：</label>
+                        <input class="text" type="text" placeholder="必填" name="nickname" value="">
+                    </div>
+
+                    <div class="control-group">
+                        <button class="btn btn-large btn-primary login-btn" data-loading-text="正在登录...">&nbsp;&nbsp;&nbsp;注&nbsp;册&nbsp;&nbsp;&nbsp;</button>
+                    </div>
+
+                </fieldset>
+
+            </form>
+        </div>
+    </div>
+</div>
+</div></div>
+
+        </div>
+        <footer class="footer">
+            <p class="copyright">&copy; wei3h.com</p>
+        </footer>
+    </div>
+</div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>
+
 
