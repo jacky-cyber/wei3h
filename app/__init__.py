@@ -17,7 +17,11 @@ def not_found(error):
 @app.route('/')
 def index():
 #    return 'Hello World!'
-    return app.send_static_file('2048.html')
+    return app.send_static_file('home.html')
+
+@app.route('/pricing')
+def pricing():
+    return app.send_static_file('pricing.html')
 
 from app.zaiwenling.views import mod as zaiwenlingModule
 app.register_blueprint(zaiwenlingModule)

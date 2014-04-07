@@ -2,247 +2,623 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="/static/img/ico/favicon.ico">
+    <title>微购物</title>
 
-    <title>Dashboard for Wei3h</title>
+    <meta name="description" content="Common Buttons &amp; Icons" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Bootstrap core CSS -->
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- basic styles -->
 
-    <!-- Custom styles for this template -->
-    <link href="/static/css/dashboard.css" rel="stylesheet">
-    <link href="/static/css/nprogress.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css" />
 
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="/static/css/font-awesome-ie7.min.css" />
+    <![endif]-->
+
+    <!-- page specific plugin styles -->
+
+    <!-- fonts -->
+
+    <link rel="stylesheet" href="/static/css/ace-fonts.css" />
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="/static/css/ace.min.css" />
+    <link rel="stylesheet" href="/static/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="/static/css/ace-skins.min.css" />
+
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="/static/css/ace-ie.min.css" />
+    <![endif]-->
+
+    <!-- inline styles related to this page -->
+
+    <!-- ace settings handler -->
+
+    <script src="/static/js/ace-extra.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="/static/js/html5shiv.js"></script>
+    <script src="/static/js/respond.min.js"></script>
     <![endif]-->
   </head>
 
   <body>
-    <div id="main"></div>
+    <div class="navbar navbar-default" id="navbar">
+      <script type="text/javascript">
+        try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+      </script>
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Wei3h</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">退出</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
-      </div>
+      <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+          <a href="#" class="navbar-brand">
+            <small>
+              <i class="icon-leaf"></i>
+              {{ wxuser.wxname }}
+            </small>
+          </a><!-- /.brand -->
+        </div><!-- /.navbar-header -->
+
+        <div class="navbar-header pull-right" role="navigation">
+          <ul class="nav ace-nav">
+
+
+            <li class="purple">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="icon-bell-alt icon-animated-bell"></i>
+                <span class="badge badge-important">8</span>
+              </a>
+
+              <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                <li class="dropdown-header">
+                  <i class="icon-warning-sign"></i>
+                  8 Notifications
+                </li>
+
+                <li>
+                  <a href="#">
+                    <div class="clearfix">
+                      <span class="pull-left">
+                        <i class="btn btn-xs no-hover btn-pink icon-comment"></i>
+                        New Comments
+                      </span>
+                      <span class="pull-right badge badge-info">+12</span>
+                    </div>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#">
+                    <i class="btn btn-xs btn-primary icon-user"></i>
+                    Bob just signed up as an editor ...
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#">
+                    <div class="clearfix">
+                      <span class="pull-left">
+                        <i class="btn btn-xs no-hover btn-success icon-shopping-cart"></i>
+                        New Orders
+                      </span>
+                      <span class="pull-right badge badge-success">+8</span>
+                    </div>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#">
+                    <div class="clearfix">
+                      <span class="pull-left">
+                        <i class="btn btn-xs no-hover btn-info icon-twitter"></i>
+                        Followers
+                      </span>
+                      <span class="pull-right badge badge-info">+11</span>
+                    </div>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#">
+                    See all notifications
+                    <i class="icon-arrow-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="green">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="icon-envelope icon-animated-vertical"></i>
+                <span class="badge badge-success">5</span>
+              </a>
+
+              <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                <li class="dropdown-header">
+                  <i class="icon-envelope-alt"></i>
+                  5 Messages
+                </li>
+
+                <li>
+                  <a href="#">
+                    <img src="/static/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                    <span class="msg-body">
+                      <span class="msg-title">
+                        <span class="blue">Alex:</span>
+                        Ciao sociis natoque penatibus et auctor ...
+                      </span>
+
+                      <span class="msg-time">
+                        <i class="icon-time"></i>
+                        <span>a moment ago</span>
+                      </span>
+                    </span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#">
+                    <img src="/static/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                    <span class="msg-body">
+                      <span class="msg-title">
+                        <span class="blue">Susan:</span>
+                        Vestibulum id ligula porta felis euismod ...
+                      </span>
+
+                      <span class="msg-time">
+                        <i class="icon-time"></i>
+                        <span>20 minutes ago</span>
+                      </span>
+                    </span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#">
+                    <img src="/static/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+                    <span class="msg-body">
+                      <span class="msg-title">
+                        <span class="blue">Bob:</span>
+                        Nullam quis risus eget urna mollis ornare ...
+                      </span>
+
+                      <span class="msg-time">
+                        <i class="icon-time"></i>
+                        <span>3:15 pm</span>
+                      </span>
+                    </span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="inbox.html">
+                    See all messages
+                    <i class="icon-arrow-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="light-blue">
+              <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                <img class="nav-user-photo" src="/static/avatars/avatar.png" alt="Jason's Photo" />
+                <span class="user-info">
+                  <small>Welcome,</small>
+                  {{ g.user.nickname }}
+                </span>
+
+                <i class="icon-caret-down"></i>
+              </a>
+
+              <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                <li>
+                  <a href="#">
+                    <i class="icon-cog"></i>
+                    Settings
+                  </a>
+                </li>
+
+                <li>
+                  <a href="#">
+                    <i class="icon-user"></i>
+                    Profile
+                  </a>
+                </li>
+
+                <li class="divider"></li>
+
+                <li>
+                  <a href="{{ url_for('dashboard.index') }}">
+                    <i class="icon-off"></i>
+                    返回
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul><!-- /.ace-nav -->
+        </div><!-- /.navbar-header -->
+      </div><!-- /.container -->
     </div>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
+    <div class="main-container" id="main-container">
+      <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+      </script>
 
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="http://getflick.io/img/slide_shareimages.jpg" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
+      <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+          <span class="menu-text"></span>
+        </a>
+
+        <div class="sidebar" id="sidebar">
+          <script type="text/javascript">
+            try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+          </script>
+
+
+          <ul class="nav nav-list">
+            {% if 'home' in request.path %}
+            <li class="active">
+            {% else %}
+            <li>
+            {% endif %}
+              <a href="{{ url_for('dashboard.wxuser_dashboard', id=wxuser.id) }}">
+                <i class="icon-dashboard"></i>
+                <span class="menu-text"> Dashboard </span>
+              </a>
+            </li>
+
+            {% if 'function' in request.path %}
+            <li class="active open">
+            {% else %}
+            <li>
+            {% endif %}
+              <a href="#" class="dropdown-toggle">
+                <i class="icon-desktop"></i>
+                <span class="menu-text"> 功能管理 </span>
+
+                <b class="arrow icon-angle-down"></b>
+              </a>
+
+              <ul class="submenu">
+              {% if 'function/subscribe' in request.path %}
+                <li class="active">
+              {% else %}
+                <li>
+              {% endif %}
+                  <a href="{{ url_for('dashboard.wxuser_function_subscribe', id=wxuser.id) }}">
+                    <i class="icon-double-angle-right"></i>
+                    关注时回复与帮助
+                  </a>
+                </li>
+
+                <li>
+                  <a href="buttons.html">
+                    <i class="icon-double-angle-right"></i>
+                    微信 - 文本回复
+                  </a>
+                </li>
+
+                <li>
+                  <a href="treeview.html">
+                    <i class="icon-double-angle-right"></i>
+                    微信 - 图文回复
+                  </a>
+                </li>
+
+                <li>
+                  <a href="jquery-ui.html">
+                    <i class="icon-double-angle-right"></i>
+                    微信 - 语音回复
+                  </a>
+                </li>
+
+<!--                 <li>
+                  <a href="nestable-list.html">
+                    <i class="icon-double-angle-right"></i>
+                    自定义LBS回复
+                  </a>
+                </li>
+ -->
+                <li>
+                  <a href="#">
+                    <i class="icon-double-angle-right"></i>
+                    回答不上来的配置
+                  </a>
+                </li>
+
+              </ul>
+            </li>
+
+            <li>
+              <a href="#" class="dropdown-toggle">
+                <i class="icon-list"></i>
+                <span class="menu-text"> Tables </span>
+
+                <b class="arrow icon-angle-down"></b>
+              </a>
+
+              <ul class="submenu">
+                <li>
+                  <a href="tables.html">
+                    <i class="icon-double-angle-right"></i>
+                    Simple &amp; Dynamic
+                  </a>
+                </li>
+
+                <li>
+                  <a href="jqgrid.html">
+                    <i class="icon-double-angle-right"></i>
+                    jqGrid plugin
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#" class="dropdown-toggle">
+                <i class="icon-edit"></i>
+                <span class="menu-text"> Forms </span>
+
+                <b class="arrow icon-angle-down"></b>
+              </a>
+
+              <ul class="submenu">
+                <li>
+                  <a href="form-elements.html">
+                    <i class="icon-double-angle-right"></i>
+                    Form Elements
+                  </a>
+                </li>
+
+                <li>
+                  <a href="form-wizard.html">
+                    <i class="icon-double-angle-right"></i>
+                    Wizard &amp; Validation
+                  </a>
+                </li>
+
+                <li>
+                  <a href="wysiwyg.html">
+                    <i class="icon-double-angle-right"></i>
+                    Wysiwyg &amp; Markdown
+                  </a>
+                </li>
+
+                <li>
+                  <a href="dropzone.html">
+                    <i class="icon-double-angle-right"></i>
+                    Dropzone File Upload
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="widgets.html">
+                <i class="icon-list-alt"></i>
+                <span class="menu-text"> Widgets </span>
+              </a>
+            </li>
+
+            <li>
+              <a href="calendar.html">
+                <i class="icon-calendar"></i>
+
+                <span class="menu-text">
+                  Calendar
+                  <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
+                    <i class="icon-warning-sign red bigger-130"></i>
+                  </span>
+                </span>
+              </a>
+            </li>
+
+            <li>
+              <a href="gallery.html">
+                <i class="icon-picture"></i>
+                <span class="menu-text"> Gallery </span>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="dropdown-toggle">
+                <i class="icon-tag"></i>
+                <span class="menu-text"> More Pages </span>
+
+                <b class="arrow icon-angle-down"></b>
+              </a>
+
+              <ul class="submenu">
+                <li>
+                  <a href="profile.html">
+                    <i class="icon-double-angle-right"></i>
+                    User Profile
+                  </a>
+                </li>
+
+                <li>
+                  <a href="inbox.html">
+                    <i class="icon-double-angle-right"></i>
+                    Inbox
+                  </a>
+                </li>
+
+                <li>
+                  <a href="pricing.html">
+                    <i class="icon-double-angle-right"></i>
+                    Pricing Tables
+                  </a>
+                </li>
+
+                <li>
+                  <a href="invoice.html">
+                    <i class="icon-double-angle-right"></i>
+                    Invoice
+                  </a>
+                </li>
+
+                <li>
+                  <a href="timeline.html">
+                    <i class="icon-double-angle-right"></i>
+                    Timeline
+                  </a>
+                </li>
+
+                <li>
+                  <a href="login.html">
+                    <i class="icon-double-angle-right"></i>
+                    Login &amp; Register
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#" class="dropdown-toggle">
+                <i class="icon-file-alt"></i>
+
+                <span class="menu-text">
+                  Other Pages
+                  <span class="badge badge-primary ">5</span>
+                </span>
+
+                <b class="arrow icon-angle-down"></b>
+              </a>
+
+              <ul class="submenu">
+                <li>
+                  <a href="faq.html">
+                    <i class="icon-double-angle-right"></i>
+                    FAQ
+                  </a>
+                </li>
+
+                <li>
+                  <a href="error-404.html">
+                    <i class="icon-double-angle-right"></i>
+                    Error 404
+                  </a>
+                </li>
+
+                <li>
+                  <a href="error-500.html">
+                    <i class="icon-double-angle-right"></i>
+                    Error 500
+                  </a>
+                </li>
+
+                <li>
+                  <a href="grid.html">
+                    <i class="icon-double-angle-right"></i>
+                    Grid
+                  </a>
+                </li>
+
+                <li>
+                  <a href="blank.html">
+                    <i class="icon-double-angle-right"></i>
+                    Blank Page
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul><!-- /.nav-list -->
+
+          <div class="sidebar-collapse" id="sidebar-collapse">
+            <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
           </div>
 
-          <h2 class="sub-header">Section title</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <script type="text/javascript">
+            try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+          </script>
         </div>
-      </div>
-    </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <div class="main-content">
+          <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+              try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+
+            <ul class="breadcrumb">
+              <li>
+                <i class="icon-home home-icon"></i>
+                <a href="{{ url_for('dashboard.wxuser_dashboard', id=wxuser.id) }}">Home</a>
+              </li>
+
+              {% block breadcrumb %}{% endblock %}
+            </ul><!-- .breadcrumb -->
+
+          </div>
+
+          <div class="page-content">
+
+            <div class="row">
+              <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                {% for category, msg in get_flashed_messages(with_categories=true) %}
+                <div class="alert alert-block alert-{{ category }}">
+                  <button type="button" class="close" data-dismiss="alert">
+                    <i class="icon-remove"></i>
+                  </button>
+
+                  {{ msg }}
+                </div>
+                {% endfor %}
+
+                <div class="row">
+                  {% block content %}
+                  {% endblock %}
+                </div>
+              </div>
+            </div><!-- /.row -->
+          </div><!-- /.page-content -->
+        </div><!-- /.main-content -->
+
+                </div><!-- /#ace-settings-container -->
+      </div><!-- /.main-container-inner -->
+
+      <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+      </a>
+    </div><!-- /.main-container -->
+
+    <!-- basic scripts -->
+
+    <!--[if !IE]> -->
+
+    <script type="text/javascript">
+      window.jQuery || document.write("<script src='/static/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+    </script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+<script type="text/javascript">
+ window.jQuery || document.write("<script src='/static/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+    <script type="text/javascript">
+      if("ontouchend" in document) document.write("<script src='/static/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    </script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/docs.min.js"></script>
-    <script src="/static/js/nprogress.js"></script>
-    <script src="/static/js/lanrenzhijia.js"></script>
+    <script src="/static/js/typeahead-bs2.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    {% block scripts %}
+    {% endblock %}
+
+    <!-- ace scripts -->
+
+    <script src="/static/js/ace-elements.min.js"></script>
+    <script src="/static/js/ace.min.js"></script>
+
+
   </body>
 </html>

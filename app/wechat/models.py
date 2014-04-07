@@ -15,7 +15,7 @@ class Wxuser(db.Model):
     wxid = db.Column(db.String(20), unique=True)
     weixin = db.Column(db.String(20))
     headerpic = db.Column(db.String(255))
-    token = db.Column(db.String(32))
+    token = db.Column(db.String(32), index=True)
     typeid = db.Column(db.Integer)
 
     appid = db.Column(db.String(32))
@@ -48,6 +48,23 @@ class Wxuser(db.Model):
 
     def __repr__(self):
         return '<Wxuser %>' % self.wxname
+
+class Follower(db.Model):
+
+    __tablename__ = 'wechat_follower'
+    id = db.Column(db.Integer, primary_key=True)
+    wxid = db.Column(db.String(20), index=True)
+    openid = db.Column(db.String(100), index=True)
+    follow_time = db.Column(db.BigInteger)
+    last_active_time = db.Column(db.BigInteger)
+
+    def __init__(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
 
 class AccountAndWxuser(db.Model):
 
