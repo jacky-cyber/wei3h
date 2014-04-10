@@ -1,0 +1,86 @@
+{% extends "dashboard_admin_base.html" %}
+
+{% block breadcrumb %}
+<li>
+	<a href="#">微官网</a>
+</li>
+
+<li class="active">基础设置</li>
+{% endblock %}
+
+{% block content %}
+
+{% if shop %}
+<div class="page-header">
+	<h1>
+		首页地址
+		<small>
+			<i class="icon-double-angle-right"></i>
+				http://wei3h.com/weigou/homepage?token={{ shop._id }}&openid=fromUsername
+		</small>
+		<button class="btn btn-success">预览</button>
+	</h1>
+</div>
+{% endif %}
+
+<form method="POST" action="" class="form-horizontal" role="form">
+	<div class="form-group">
+		<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 官网标题 </label>
+
+		<div class="col-sm-9">
+			<input type="text" name="title" value="{{ shop.title }}" placeholder="官网标题" class="col-xs-10 col-sm-5">
+		</div>
+	</div>
+
+	<div class="space-4"></div>
+
+	<div class="form-group">
+		<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 触发官网关键字 </label>
+
+		<div class="col-sm-9">
+			<input type="text" name="keyword" value="{% if shop.keyword %}{{ shop.keyword }}{% else %}首页{% endif %}" placeholder="首页" class="col-xs-10 col-sm-5">
+		</div>
+	</div>
+
+	<div class="space-4"></div>
+
+	<div class="form-group">
+		<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 图文消息封面 </label>
+
+		<div class="col-sm-9">
+			<input type="text" name="picurl" value="{{ shop.picurl }}" placeholder="网址" class="col-xs-10 col-sm-5">
+		</div>
+	</div>
+
+	<div class="space-4"></div>
+
+	<div class="form-group">
+		<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 图文消息简介 </label>
+
+		<div class="col-sm-9">
+			<textarea class="form-control limited" name="description" maxlength="140" required >{{ shop.description }}</textarea>
+		</div>
+	</div>
+
+	<div class="space-4"></div>
+
+
+	<div class="clearfix form-actions">
+		<div class="col-md-offset-3 col-md-9">
+			<button class="btn btn-info" type="submit">
+				<i class="icon-ok bigger-110"></i>
+				提交
+			</button>
+
+			&nbsp; &nbsp; &nbsp;
+			<button class="btn" type="reset">
+				<i class="icon-undo bigger-110"></i>
+				重置
+			</button>
+		</div>
+	</div>
+
+
+</form>
+
+{% endblock %}

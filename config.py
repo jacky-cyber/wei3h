@@ -14,6 +14,9 @@ PASSWORD_SECRET = 'aJJOvVwnT72ywBbRtiCMfbXXQeKIj0tqiT6s4jKtyOg='
 SQLALCHEMY_DATABASE_URI = 'mysql://root:123@localhost:3306/test?charset=utf8'
 DATABASE_CONNECT_OPTIONS = {}
 
+UPLOAD_FOLDER = '/Users/zhufeng/codes/wei3h/app/static/uploads'
+ALLOWED_EXTENSIONS = set(['bmp', 'png', 'jpeg', 'jpg', 'gif', 'mp3', 'wma', 'wav', 'amr'])
+
 THREADS_PER_PAGE = 8
 
 CSRF_ENABLED = True

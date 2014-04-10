@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link rel="shortcut icon" href="/static/img/ico/favicon.ico">
+<link rel="stylesheet" href="/static/css/weigou.css">
+<link rel="stylesheet" href="/static/css/style.css">
+<script type="text/javascript" src="/static/js/zepto.min.js"></script>
+
+<title>{{ title }}</title>
+</head>
+
+<body>
+	<div class="lay_header" style="height: 45px">
+		<div class="lay_toptab mod_tab" id="lay_head">
+			<div class="tab_item go_back" onclick="window.history.go(-1);"><i class="qb_icon icon_goback"></i></div>
+			<a class="tab_item" href="http://weigou.qq.com/o2ov1/cn/index.xhtml?bid=2267663158&prePageId=1-3&ifb=0"><i class="qb_icon icon_home"></i></a>
+			<a class="tab_item" href="http://weigou.qq.com/o2ov1/cn/my/index.xhtml?bid=2267663158&prePageId=1-3&ifb=0"><i class="qb_icon icon_icenter"></i></a>
+			<a class="tab_item" href="http://weigou.qq.com/o2ov1/cn/cmdy/list.xhtml?bid=2267663158&prePageId=1-3&ifb=0"><i class="qb_icon icon_cart"></i><i class="qb_icon icon_number_bubble qb_none" id="#cartNum">0</i></a>
+		</div>
+	</div>
+{% block content %}
+{% endblock %}
+<div class="lay_footer qb_tac qb_fs_s mod_mb15">
+		<div class="fn_quicklinks">
+			<a class="mod_color_weak" href="http://weigou.qq.com/o2ov1/cn/index.xhtml?bid=2267663158&prePageId=1-3&ifb=0">商户首页</a>
+			<span class="mod_color_comment">|</span>
+			<a class="mod_color_weak" href="http://weigou.qq.com/o2ov1/cn/my/index.xhtml?bid=2267663158&prePageId=1-3&ifb=0">会员中心</a>
+			<span class="mod_color_comment">|</span>
+			<a class="mod_color_weak" href="http://weigou.qq.com/o2ov1/cn/template.xhtml?tid=o_brand_2267663158&bid=2267663158&prePageId=1-3&ifb=0">品牌介绍</a>
+			<span class="mod_color_comment">|</span>
+	        <a class="mod_color_weak" href="#">用户反馈</a>
+	    </div>
+	    <div class="fn_copyright"  style="text-align:center;color:#333;">
+
+	        <div class="mod_color_comment fn_copyright_text">Copyright &copy; 2014 Wei3h.<br>All Rights Reserved. </div>
+	        <div class="mod_color_comment fn_copyright_text">台州朗和网络 版权所有</div>
+	    </div>
+	</div>
+
+</body>
+</html>
+{% block specialscript %}
+{% endblock %}

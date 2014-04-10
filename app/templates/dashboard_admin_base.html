@@ -286,6 +286,7 @@
               </a>
 
               <ul class="submenu">
+
               {% if 'function/subscribe' in request.path %}
                 <li class="active">
               {% else %}
@@ -293,68 +294,130 @@
               {% endif %}
                   <a href="{{ url_for('dashboard.wxuser_function_subscribe', id=wxuser.id) }}">
                     <i class="icon-double-angle-right"></i>
-                    关注时回复与帮助
+                    关注时回复
                   </a>
                 </li>
 
+              {% if 'function/text' in request.path or 'editfunctiontext' in request.path %}
+                <li class="active">
+              {% else %}
                 <li>
-                  <a href="buttons.html">
+              {% endif %}
+                  <a href="{{ url_for('dashboard.wxuser_function_text') }}">
                     <i class="icon-double-angle-right"></i>
-                    微信 - 文本回复
+                    文本回复
                   </a>
                 </li>
 
                 <li>
                   <a href="treeview.html">
                     <i class="icon-double-angle-right"></i>
-                    微信 - 图文回复
+                    图文回复
                   </a>
                 </li>
-
+<!--
                 <li>
                   <a href="jquery-ui.html">
                     <i class="icon-double-angle-right"></i>
                     微信 - 语音回复
                   </a>
+                </li> -->
+
+              {% if 'function/default' in request.path %}
+                <li class="active">
+              {% else %}
+                <li>
+              {% endif %}
+               <a href="{{ url_for('dashboard.wxuser_function_default') }}">
+                    <i class="icon-double-angle-right"></i>
+                    默认回复
+                  </a>
                 </li>
 
-<!--                 <li>
-                  <a href="nestable-list.html">
-                    <i class="icon-double-angle-right"></i>
-                    自定义LBS回复
-                  </a>
-                </li>
- -->
-                <li>
-                  <a href="#">
-                    <i class="icon-double-angle-right"></i>
-                    回答不上来的配置
-                  </a>
-                </li>
 
               </ul>
             </li>
 
+            {% if 'filepages' in request.path %}
+            <li class="active open">
+            {% else %}
             <li>
+            {% endif %}
+
               <a href="#" class="dropdown-toggle">
-                <i class="icon-list"></i>
-                <span class="menu-text"> Tables </span>
+                <i class="icon-cloud"></i>
+                <span class="menu-text"> 素材管理 </span>
 
                 <b class="arrow icon-angle-down"></b>
               </a>
 
               <ul class="submenu">
+              {% if 'filepages/pics' in request.path %}
+                <li class="active">
+              {% else %}
                 <li>
-                  <a href="tables.html">
+              {% endif %}
+                  <a href="{{ url_for('dashboard.filepage_pics') }}">
                     <i class="icon-double-angle-right"></i>
-                    Simple &amp; Dynamic
+                    图片素材
+                  </a>
+                </li>
+
+              {% if 'filepages/musics' in request.path %}
+                <li class="active">
+              {% else %}
+                <li>
+              {% endif %}
+                  <a href="{{ url_for('dashboard.filepage_pics') }}">
+                    <i class="icon-double-angle-right"></i>
+                    音乐素材
+                  </a>
+                </li>
+
+<!--                 <li>
+                  <a href="jqgrid.html">
+                    <i class="icon-double-angle-right"></i>
+                    首页幻灯片
+                  </a>
+                </li> -->
+              </ul>
+            </li>
+
+            {% if 'weshop' in request.path %}
+            <li class="active open">
+            {% else %}
+            <li>
+            {% endif %}
+              <a href="#" class="dropdown-toggle">
+                <i class="icon-list"></i>
+                <span class="menu-text"> 微官网 </span>
+
+                <b class="arrow icon-angle-down"></b>
+              </a>
+
+              <ul class="submenu">
+                {% if 'weshop/index/settings' in request.path %}
+                <li class="active">
+              {% else %}
+                <li>
+              {% endif %}
+                  <a href="{{ url_for('dashboard.weshop_index_settings') }}">
+                    <i class="icon-double-angle-right"></i>
+                    基础设置
                   </a>
                 </li>
 
                 <li>
                   <a href="jqgrid.html">
                     <i class="icon-double-angle-right"></i>
-                    jqGrid plugin
+                    首页幻灯片
+                  </a>
+                </li>
+
+                <li>
+                  <a href="jqgrid.html">
+                    <i class="icon-double-angle-right"></i>
+                    分类管理
                   </a>
                 </li>
               </ul>
@@ -363,7 +426,7 @@
             <li>
               <a href="#" class="dropdown-toggle">
                 <i class="icon-edit"></i>
-                <span class="menu-text"> Forms </span>
+                <span class="menu-text"> 商品管理 </span>
 
                 <b class="arrow icon-angle-down"></b>
               </a>
@@ -402,128 +465,30 @@
             <li>
               <a href="widgets.html">
                 <i class="icon-list-alt"></i>
-                <span class="menu-text"> Widgets </span>
+                <span class="menu-text"> 订单管理 </span>
               </a>
             </li>
 
             <li>
-              <a href="calendar.html">
+              <a href="#" class="dropdown-toggle">
                 <i class="icon-calendar"></i>
-
-                <span class="menu-text">
-                  Calendar
-                  <span class="badge badge-transparent tooltip-error" title="2&nbsp;Important&nbsp;Events">
-                    <i class="icon-warning-sign red bigger-130"></i>
-                  </span>
-                </span>
-              </a>
-            </li>
-
-            <li>
-              <a href="gallery.html">
-                <i class="icon-picture"></i>
-                <span class="menu-text"> Gallery </span>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="icon-tag"></i>
-                <span class="menu-text"> More Pages </span>
+                <span class="menu-text"> 推广活动 </span>
 
                 <b class="arrow icon-angle-down"></b>
               </a>
 
               <ul class="submenu">
                 <li>
-                  <a href="profile.html">
+                  <a href="tables.html">
                     <i class="icon-double-angle-right"></i>
-                    User Profile
+                    优惠券
                   </a>
                 </li>
 
                 <li>
-                  <a href="inbox.html">
+                  <a href="jqgrid.html">
                     <i class="icon-double-angle-right"></i>
-                    Inbox
-                  </a>
-                </li>
-
-                <li>
-                  <a href="pricing.html">
-                    <i class="icon-double-angle-right"></i>
-                    Pricing Tables
-                  </a>
-                </li>
-
-                <li>
-                  <a href="invoice.html">
-                    <i class="icon-double-angle-right"></i>
-                    Invoice
-                  </a>
-                </li>
-
-                <li>
-                  <a href="timeline.html">
-                    <i class="icon-double-angle-right"></i>
-                    Timeline
-                  </a>
-                </li>
-
-                <li>
-                  <a href="login.html">
-                    <i class="icon-double-angle-right"></i>
-                    Login &amp; Register
-                  </a>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="#" class="dropdown-toggle">
-                <i class="icon-file-alt"></i>
-
-                <span class="menu-text">
-                  Other Pages
-                  <span class="badge badge-primary ">5</span>
-                </span>
-
-                <b class="arrow icon-angle-down"></b>
-              </a>
-
-              <ul class="submenu">
-                <li>
-                  <a href="faq.html">
-                    <i class="icon-double-angle-right"></i>
-                    FAQ
-                  </a>
-                </li>
-
-                <li>
-                  <a href="error-404.html">
-                    <i class="icon-double-angle-right"></i>
-                    Error 404
-                  </a>
-                </li>
-
-                <li>
-                  <a href="error-500.html">
-                    <i class="icon-double-angle-right"></i>
-                    Error 500
-                  </a>
-                </li>
-
-                <li>
-                  <a href="grid.html">
-                    <i class="icon-double-angle-right"></i>
-                    Grid
-                  </a>
-                </li>
-
-                <li>
-                  <a href="blank.html">
-                    <i class="icon-double-angle-right"></i>
-                    Blank Page
+                    会员卡
                   </a>
                 </li>
               </ul>
@@ -610,14 +575,14 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/typeahead-bs2.min.js"></script>
 
-    <!-- page specific plugin scripts -->
-    {% block scripts %}
-    {% endblock %}
-
     <!-- ace scripts -->
 
     <script src="/static/js/ace-elements.min.js"></script>
     <script src="/static/js/ace.min.js"></script>
+
+    <!-- page specific plugin scripts -->
+    {% block scripts %}
+    {% endblock %}
 
 
   </body>

@@ -1,0 +1,62 @@
+{% extends "dashboard_admin_base.html" %}
+
+{% block breadcrumb %}
+<li>
+	<a href="#">素材管理</a>
+</li>
+<li class="active">图片素材</li>
+{% endblock %}
+
+{% block content %}
+<div class="col-xs-12">
+	<p><a href="#" class="btn btn-info" data-toggle="modal" data-target="#addFunctionText">添加</a></p>
+</div>
+
+<div class="modal fade" id="addFunctionText" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+      <form action="{{ url_for('dashboard.upload_file') }}" method=post enctype=multipart/form-data>
+      <div class="form-group">
+      <input type=file name=file></div>
+      <button type="submit" class="btn btn-default">添加</button>
+         </form>
+
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-xs-12">
+
+<div class="row-fluid">
+	<ul class="ace-thumbnails">
+	{% for pic in pics %}
+		<li>
+			<a href="{{ pic.url }}" title="Photo Title" data-rel="colorbox" target="_blank">
+				<img alt="150x150" src="{{ pic.url }}" width="150" height="150">
+					<div class="tags">
+						<span class="label-holder">
+							<span class="label label-info">{{ pic.filename }}</span>
+						</span>
+					</div>
+			</a>
+			<div class="tools">
+				<a href="{{ pic.url }}" target="_blank"><i class="icon-link"></i></a>
+				<a href="/dashboard/filepages/delpic/{{ pic.id }}"><i class="icon-remove red"></i></a>
+			</div>
+		</li>
+	{% endfor %}
+	</ul>
+</div>
+
+
+
+
+</div>
+{% endblock %}
+

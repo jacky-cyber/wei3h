@@ -21,4 +21,3 @@ class AddWxuserForm(Form):
         wxuser.save()
         return wxuser
 
-

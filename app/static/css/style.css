@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {font-size:1em; color:#222; font-family:'微软雅黑'; margin:0; padding:0;   }
+ul,li {list-style:none; margin:0px; padding:0px;}
+img {border:0;}
+*{ margin:0; padding:0;}
+.show1 { position:relative; overflow:hidden;}
+.show1 ul{ white-space:nowrap; position:absolute; top:0; left:0; background:#fff; }
+.show1 ul li{ position:absolute;}
+.show1 ul li.first{ z-index:1;}
+.show1 ul li img{ border:0; margin:0; padding:0; display:inline;}
+.show1 .btnposition { position:absolute; width:454px; height:124px; bottom:60px; left:50%;  margin-left:-227px;  text-align:center; overflow:hidden; z-index:99;}
+.btnposition .btn{ width:454px; height:124px; position:relative; overflow:hidden; margin:0 auto;}
+.btnposition .btn a { position:absolute; display:inline-block; _display:inline; _zoom:1; width:130px; height:40px; line-height:40px; text-align:center; font-size:14px; margin:1px; cursor:pointer; background:#fff;
+ color:#535353; text-decoration:none; }
+ .show1 .btn a :hover{color:#535353; text-decoration:none;}
+.show1 .btn a.on {background:#fff;}
+.brword{ left:1px; top:1; filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity: 0; opacity: 0;}
+.new{ left:322px; top:1; filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity: 0; opacity: 0;}
+.caoliu {left:1px; top:84px; filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity: 0; opacity: 0;}
+.jiaoshi{ left:322px; top:84px; filter:alpha(opacity=0); -moz-opacity:0; -khtml-opacity: 0; opacity: 0;}
+
+
+.rotation{-webkit-transform:rotate(90deg); -moz-transform:rotate(90deg); -o-tranfsorm:rotate(90deg);}
+

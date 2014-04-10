@@ -38,7 +38,7 @@ class Account(db.Model):
         return self.nickname or self.phone
 
     def __repr__(self):
-        return '<User %>' % self.phone
+        return '<User %s>' % self.phone
 
     @staticmethod
     def create_password(raw):

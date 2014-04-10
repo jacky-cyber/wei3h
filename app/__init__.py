@@ -37,3 +37,11 @@ app.register_blueprint(dashboardModule)
 
 from app.games.views import mod as gamesModule
 app.register_blueprint(gamesModule)
+
+
+from app.weigou.views import mod as weigouModule
+app.register_blueprint(weigouModule)
+
+
+from app.weshop.views import mod as weshopModule
+app.register_blueprint(weshopModule)

@@ -1,0 +1,125 @@
+{% extends 'weigou_base.html' %}
+
+{% block content %}
+<div class="show1">
+	<ul>
+    	<li class="first"><img src="http://p.qpic.cn/ecc_merchant/0/0.jpg_1389924534770/0" alt="" /></li>
+		<li><img src="http://p.qpic.cn/ecc_merchant/0/1.jpg_1389924534770/0" alt="" /></li>
+	</ul>
+	<div class="btnposition">
+    </div>
+</div>
+{% endblock %}
+
+
+{% block specialscript %}
+<script type="text/javascript">
+var count=$(".show1 ul li").length;
+
+;(function($){
+    var len=0;
+
+
+		var wimg= $(window).width();
+		  var wheight=$(window).height();
+		  var imgh=wimg*860/640-wheight+45;
+
+		  $(".show1 ul").height(wimg*860/640);
+		   $(".show1 li").height(wimg*860/640);
+		   $(".show1 img").width(wimg);
+		   $(".show1 img").height(wimg*860/640);
+		   if(imgh<0){
+			    $(".show1").height(wimg*860/640);
+			   $(".show1 ul").css("top","0px");
+			   }
+		   else{
+			    $(".show1").height(wheight-45);
+			    $(".show1 ul").css("top",-imgh/6+"px");
+				}
+		if(wimg > wheight){
+
+			 $(".show1 ul").css("top",-imgh/2+"px");
+
+			}
+	var btn = "<div class='btn'><a href='http://weigou.qq.com/wkd/modulepage/2267663158/1713/0/0' class='brword'>全部商品</a><a class='new' href='http://weigou.qq.com/wkd/modulepage/2267663158/274660/0/0'>新品上市</a><a class='caoliu' href='http://weigou.qq.com/wkd/modulepage/2267663158/274882/0/0'>潮流趋势</a><a class='jiaoshi' href='http://weigou.qq.com/wkd/modulepage/2267663158/274907/0/0'>搭配教室</a></div>";
+		$(".btnposition").append(btn);
+
+	 window.onresize=resizeBannerImage;
+	$.show = function() {
+		$(".show1 ul li").eq(len).animate({opacity: 0}, 2500,'ease-out')
+		$(".show1 ul li").eq(len).siblings("li").animate({opacity: 1}, 2500,'ease-out')
+   	 	len++;
+		if(len==2){len=0;}
+
+
+
+    };
+    clearInterval(test);  //清理一次，下面再执行
+    var test = setInterval(function(){
+        $.show();
+    },4000);
+
+	selectSlide();
+
+    })(Zepto)
+
+	function resizeBannerImage(){
+		var wimg= $(window).width();
+		  var wheight=$(window).height();
+		  var imgh=wimg*860/640-wheight+45;
+
+		  $(".show1 ul").height(wimg*860/640);
+		   $(".show1 li").height(wimg*860/640);
+		   $(".show1 img").width(wimg);
+		   $(".show1 img").height(wimg*860/640);
+		   if(imgh<0){
+			    $(".show1").height(wimg*860/640);
+			   $(".show1 ul").css("top","0px");
+			   }
+		   else{
+			    $(".show1").height(wheight-45);
+			    $(".show1 ul").css("top",-imgh/6+"px");
+				}
+		if(wimg > wheight){
+
+			 $(".show1 ul").css("top",-imgh/2+"px");
+
+			}
+
+
+   }
+
+
+   function selectSlide(){
+
+	$(".brword").css("opacity","0");
+		$(".new").css("opacity","0");
+		$(".caoliu").css("opacity","0");
+		$(".jiaoshi").css("opacity","0");
+		 $(".brword").animate({
+			left: "95px",
+			top: "20px",
+			opacity: "0.8"
+			  },  500 );
+		 $(".new").animate({
+			left: "228px",
+			top: "20px",
+			opacity: "0.8"
+			  },  500 );
+		 $(".caoliu").animate({
+			left: "95px",
+			top: "63px",
+			opacity: "0.8"
+			  },  500 );
+		 $(".jiaoshi").animate({
+			left: "228px",
+			top: "63px",
+			opacity: "0.8"
+			  },  500 );
+
+
+	}
+
+</script>
+
+{% endblock %}

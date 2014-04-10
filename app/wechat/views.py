@@ -14,13 +14,18 @@ from ..wpi.api import *
 
 mod = Blueprint('wechat', __name__, url_prefix='/wechat')
 
+import pymongo
+from bson.objectid import ObjectId
+conn = pymongo.Connection('localhost', 5430)
+db = conn.test
+
 @mod.before_request
 def before_request():
     g.user = get_current_user()
 
-@mod.route('/home/<token>')
-def home(token):
-    return token
+# @mod.route('/home/<token>')
+# def home(token):
+#     return token
 
 @mod.route('/addwechat/', methods=['GET', 'POST'])
 def add_wechat():
@@ -31,8 +36,7 @@ def add_wechat():
 
         wxuser = form.save()
 
-        flash('Thanks for registering ' + wxuser.getToken())
-        return redirect(url_for('wechat.home', token=wxuser.getToken()))
+        return redirect(url_for('dashboard.index'))
     return render_template('wechat/add_wechat.html', form=form)
 
 @mod.route('/api/<token>', methods=['GET', 'POST'])
@@ -52,8 +56,10 @@ def wechat_api(token):
         CreateTime = message['CreateTime']
         MsgType = message['MsgType']
 
+        s = ''
+
         if Follower.query.filter_by(wxid=ToUserName, openid=FromUserName).count() == 0:
-            add_follower(ToUserName, FromUserName, 0, CreateTime)
+            add_follower(ToUserName, FromUserName, CreateTime, CreateTime)
         else:
             update_follower(ToUserName, FromUserName, CreateTime)
 
@@ -63,9 +69,15 @@ def wechat_api(token):
                 pass
             if message['Event'] == 'unsubscribe':
                 delete_follower(ToUserName, FromUserName)
+        elif MsgType == 'text':
+            get_content = message['Content']
+            re = db.reply.find_one({'wxid': ToUserName, 'msgtype': 'text', 'keyword': get_content}, {'_id': 0})
 
+            if re is None:
+                re = db.reply.find_one({'wxid': ToUserName, 'msgtype': 'text', 'keyword': 'pdlerfzahufletn'}, {'_id': 0})
+            s = re.get('content', '')
 
-        r = reply('text', '朱峰', ToUserName, FromUserName)
+        r = reply('text', s, ToUserName, FromUserName)
         response = make_response(r)
         response.content_type = 'application/xml'
         return response

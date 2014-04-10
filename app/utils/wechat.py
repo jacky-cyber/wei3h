@@ -18,5 +18,5 @@ def delete_follower(wxid=None, openid=None):
     db.session.commit()
 
 def update_follower(wxid=None, openid=None, last_active_time=int(time.time())):
-    follower = Follower.query.filter(wxid=wxid, openid=openid).update(dict(last_active_time=last_active_time))
+    follower = Follower.query.filter_by(wxid=wxid, openid=openid).update(dict(last_active_time=last_active_time))
     db.session.commit()
