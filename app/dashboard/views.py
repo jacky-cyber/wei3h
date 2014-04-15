@@ -19,6 +19,7 @@ from app.wechat.models import Wxuser, AccountAndWxuser
 
 mod = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
+import pymongo
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 conn = MongoClient(host='localhost', port=5430)
@@ -148,6 +149,21 @@ def filepage_pics():
     pics = Filepage.query.filter_by(ptype='pic', account_id=g.user.id).all()
     return render_template('dashboard/filepage_pics.html', wxuser=g.wxuser, pics=pics)
 
+@mod.route('/filepages/news/')
+@require_login
+def filepage_news():
+    pics = Filepage.query.filter_by(ptype='pic', account_id=g.user.id).all()
+
+    return render_template('dashboard/filepage_news.html', wxuser=g.wxuser, pics=pics)
+
+@mod.route('/filepages/createonews/', methods=['GET', 'POST'])
+def filepage_createonews():
+    return render_template('dashboard/filepage_createonews.html', wxuser=g.wxuser)
+
+@mod.route('/filepages/createmnews/', methods=['GET', 'post'])
+def filepage_createmnews():
+    return render_template('dashboard/filepage_createmnews.html', wxuser=g.wxuser)
+
 @mod.route('/filepages/delpic/<id>')
 def del_filepages_pic(id):
     filepage = Filepage.query.get(id)
@@ -182,6 +198,69 @@ def weshop_index_settings():
         return redirect(url_for('dashboard.weshop_index_settings'))
 
     return render_template('dashboard/weshop_index_settings.html', wxuser=g.wxuser, shop=shop)
+
+@mod.route('/weshop/index/pics/', methods=['GET', 'POST'])
+@require_login
+def weshop_index_pics():
+    pics = db.shopics.find({'wxuser_id': g.wxuser.id}).sort('rate')
+
+    return render_template('dashboard/weshop_index_pics.html', wxuser=g.wxuser, pics=pics)
+
+@mod.route('/addweshopic/', methods=['GET', 'POST'])
+@require_login
+def add_weshopic():
+    form = request.form
+
+    wxuser_id = g.wxuser.id
+    shop_id = str(db.shop.find_one({'wxuser_id': wxuser_id})['_id'])
+
+    picname = form['picname']
+    picdescription = form['picdescription']
+    url = form['url']
+    rate = form['rate']
+    isdisplay = form['isdisplay']
+    created = str(datetime.date.today())
+
+    d = {'wxuser_id': wxuser_id, 'shop_id': shop_id, 'picname': picname,\
+           'picdescription': picdescription, 'url': url,\
+        'rate': rate, 'isdisplay': isdisplay, 'created': created}
+
+
+    if request.method == 'POST':
+
+        db.shopics.insert(d)
+
+        flash('添加成功 ', 'success')
+        return redirect(url_for('dashboard.weshop_index_pics'))
+    return render_template('dashboard/add_functiontext.html', form=form, wxuser=g.wxuser)
+
+@mod.route('/weshop/index/navs/', methods=['GET', 'POST'])
+@require_login
+def weshop_index_navs():
+    navs = db.shopnavs.find({'wxuser_id': g.wxuser.id}).sort('rate')
+
+    return render_template('dashboard/weshop_index_navs.html', wxuser=g.wxuser, navs=navs)
+
+@mod.route('/weshop/index/pages/')
+@require_login
+def weshop_index_pages():
+    pages = db.shopages.find({'wxuser_id': g.wxuser.id}).sort('rate')
+
+    return render_template('dashboard/weshop_index_pages.html', wxuser=g.wxuser, pages=pages)
+
+@mod.route('/addweshopage/', methods=['GET', 'POST'])
+@require_login
+def add_weshopage():
+    form = request.form
+
+    if request.method == 'POST':
+
+        pass
+    return render_template('dashboard/add_weshopage.html', form=form, wxuser=g.wxuser)
+
+
+
+
 
 
 def allowed_file(filename):

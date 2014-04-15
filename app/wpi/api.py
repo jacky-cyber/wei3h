@@ -36,7 +36,7 @@ def reply(msgType, content, fromUsername, toUsername):
         reply('news', [{'title':'abc1', 'description':'abc1','picUrl':'pic_url1','url':'url1'}, {'title':'abc2', 'description':'abc2','picUrl':'pic_url2','url':'url2'}], 'zhu', 'feng')
     '''
 
-    env = Environment(loader=FileSystemLoader('/root/wei3h/app/wpi/'))
+    env = Environment(loader=FileSystemLoader('.'))
     template = env.get_template('tpl.txt')
 
 

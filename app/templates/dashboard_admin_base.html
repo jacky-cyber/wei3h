@@ -132,78 +132,6 @@
               </ul>
             </li>
 
-            <li class="green">
-              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <i class="icon-envelope icon-animated-vertical"></i>
-                <span class="badge badge-success">5</span>
-              </a>
-
-              <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-                <li class="dropdown-header">
-                  <i class="icon-envelope-alt"></i>
-                  5 Messages
-                </li>
-
-                <li>
-                  <a href="#">
-                    <img src="/static/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
-                    <span class="msg-body">
-                      <span class="msg-title">
-                        <span class="blue">Alex:</span>
-                        Ciao sociis natoque penatibus et auctor ...
-                      </span>
-
-                      <span class="msg-time">
-                        <i class="icon-time"></i>
-                        <span>a moment ago</span>
-                      </span>
-                    </span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#">
-                    <img src="/static/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
-                    <span class="msg-body">
-                      <span class="msg-title">
-                        <span class="blue">Susan:</span>
-                        Vestibulum id ligula porta felis euismod ...
-                      </span>
-
-                      <span class="msg-time">
-                        <i class="icon-time"></i>
-                        <span>20 minutes ago</span>
-                      </span>
-                    </span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="#">
-                    <img src="/static/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
-                    <span class="msg-body">
-                      <span class="msg-title">
-                        <span class="blue">Bob:</span>
-                        Nullam quis risus eget urna mollis ornare ...
-                      </span>
-
-                      <span class="msg-time">
-                        <i class="icon-time"></i>
-                        <span>3:15 pm</span>
-                      </span>
-                    </span>
-                  </a>
-                </li>
-
-                <li>
-                  <a href="inbox.html">
-                    See all messages
-                    <i class="icon-arrow-right"></i>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
             <li class="light-blue">
               <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                 <img class="nav-user-photo" src="/static/avatars/avatar.png" alt="Jason's Photo" />
@@ -279,7 +207,7 @@
             <li>
             {% endif %}
               <a href="#" class="dropdown-toggle">
-                <i class="icon-desktop"></i>
+                <i class="icon-mail-reply"></i>
                 <span class="menu-text"> 功能管理 </span>
 
                 <b class="arrow icon-angle-down"></b>
@@ -363,14 +291,14 @@
                   </a>
                 </li>
 
-              {% if 'filepages/musics' in request.path %}
+              {% if 'filepages/news' in request.path %}
                 <li class="active">
               {% else %}
                 <li>
               {% endif %}
-                  <a href="{{ url_for('dashboard.filepage_pics') }}">
+                  <a href="{{ url_for('dashboard.filepage_news') }}">
                     <i class="icon-double-angle-right"></i>
-                    音乐素材
+                    图文素材
                   </a>
                 </li>
 
@@ -407,17 +335,36 @@
                   </a>
                 </li>
 
+                {% if 'weshop/index/pics' in request.path %}
+                <li class="active">
+              {% else %}
                 <li>
-                  <a href="jqgrid.html">
+              {% endif %}
+                  <a href="{{ url_for('dashboard.weshop_index_pics') }}">
                     <i class="icon-double-angle-right"></i>
                     首页幻灯片
                   </a>
                 </li>
 
+                {% if 'weshop/index/navs' in request.path %}
+                <li class="active">
+              {% else %}
                 <li>
-                  <a href="jqgrid.html">
+              {% endif %}
+                  <a href="{{ url_for('dashboard.weshop_index_navs') }}">
                     <i class="icon-double-angle-right"></i>
-                    分类管理
+                    导航管理
+                  </a>
+                </li>
+
+                {% if 'weshop/index/pages' in request.path %}
+                <li class="active">
+              {% else %}
+                <li>
+              {% endif %}
+                  <a href="{{ url_for('dashboard.weshop_index_pages') }}">
+                    <i class="icon-double-angle-right"></i>
+                    页面管理
                   </a>
                 </li>
               </ul>
@@ -435,44 +382,101 @@
                 <li>
                   <a href="form-elements.html">
                     <i class="icon-double-angle-right"></i>
-                    Form Elements
+                    商品发布
                   </a>
                 </li>
 
                 <li>
                   <a href="form-wizard.html">
                     <i class="icon-double-angle-right"></i>
-                    Wizard &amp; Validation
+                    出售中的商品
                   </a>
                 </li>
 
                 <li>
                   <a href="wysiwyg.html">
                     <i class="icon-double-angle-right"></i>
-                    Wysiwyg &amp; Markdown
+                    仓库中的商品
                   </a>
                 </li>
 
                 <li>
                   <a href="dropzone.html">
                     <i class="icon-double-angle-right"></i>
-                    Dropzone File Upload
+                    分类管理
                   </a>
                 </li>
               </ul>
             </li>
 
             <li>
-              <a href="widgets.html">
-                <i class="icon-list-alt"></i>
-                <span class="menu-text"> 订单管理 </span>
+              <a href="widgets.html" class="dropdown-toggle">
+                <i class="icon-shopping-cart"></i>
+                <span class="menu-text"> 交易管理 </span>
+                <b class="arrow icon-angle-down"></b>
               </a>
+
+              <ul class="submenu">
+
+                <li>
+                  <a href="jqgrid.html">
+                    <i class="icon-double-angle-right"></i>
+                    订单管理
+                  </a>
+                </li>
+
+                <li>
+                  <a href="tables.html">
+                    <i class="icon-double-angle-right"></i>
+                    导出订单
+                  </a>
+                </li>
+
+                <li>
+                  <a href="jqgrid.html">
+                    <i class="icon-double-angle-right"></i>
+                    会员
+                  </a>
+                </li>
+              </ul>
             </li>
 
             <li>
               <a href="#" class="dropdown-toggle">
-                <i class="icon-calendar"></i>
-                <span class="menu-text"> 推广活动 </span>
+                <i class="icon-group"></i>
+                <span class="menu-text"> 客户管理 </span>
+                <b class="arrow icon-angle-down"></b>
+              </a>
+
+              <ul class="submenu">
+
+                <li>
+                  <a href="jqgrid.html">
+                    <i class="icon-double-angle-right"></i>
+                    顾客
+                  </a>
+                </li>
+
+                <li>
+                  <a href="tables.html">
+                    <i class="icon-double-angle-right"></i>
+                    公众号粉丝
+                  </a>
+                </li>
+
+                <li>
+                  <a href="jqgrid.html">
+                    <i class="icon-double-angle-right"></i>
+                    会员
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a href="#" class="dropdown-toggle">
+                <i class="icon-flag"></i>
+                <span class="menu-text"> 促销管理 </span>
 
                 <b class="arrow icon-angle-down"></b>
               </a>
@@ -492,6 +496,13 @@
                   </a>
                 </li>
               </ul>
+            </li>
+
+            <li>
+              <a href="widgets.html">
+                <i class="icon-gear"></i>
+                <span class="menu-text"> 设置 </span>
+              </a>
             </li>
           </ul><!-- /.nav-list -->
 

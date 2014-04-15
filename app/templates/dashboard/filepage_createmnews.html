@@ -1,0 +1,318 @@
+{% extends "dashboard_admin_base.html" %}
+
+{% block breadcrumb %}
+<li>
+	<a href="#">素材管理</a>
+</li>
+<li class="active">图文素材</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="col-xs-12">
+		<script type="text/javascript" src="/static/js/jquery.form.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/css/news.css">
+
+<div class="alert alert-block alert-success">
+	<button type="button" class="close" data-dismiss="alert">
+		<i class="icon-remove"></i>
+	</button>
+
+	<p>
+		图文素材支持4种链接类型，分别是素材链接（自定义编辑内容）、外部链接、店铺链接、店铺分类链接，请在下面的链接类型中进行选择。
+	</p>
+</div>
+
+<div class="form">
+<div class="formcenter">
+<div id="ocontent">
+		<div id="o_left">
+		<div id="surface" class="selectface">
+			<a href="javascript:void(0);return false;" id="ztitle" class="facecentent">标题</a>
+			<img src="/static/img/surface.jpg" rel="" class="faceimg">
+			<div class="tempcontent" style="display:none;"></div>
+			<div class="tempdescribe" style="display:none;"></div>
+			<div class="tempurltype" style="display:none;">0</div>
+			<div class="tempoutsideurl" style="display:none;"></div>
+			<div class="tempshopid" style="display:none;">0</div>
+			<div class="tempshoptype" style="display:none;">0</div>
+			<div class="contrlface" style="display: none;">
+				<a href="javascript:void(0);" class="faceedit">编辑</a>
+			</div>			
+		</div>
+		<div class="sonface" id="sonface">
+		
+			<div class="facecentent">标题</div>
+			<img src="/static/img/sonface.jpg" class="faceimg" rel="">
+			<div class="tempcontent" style="display:none;"></div>
+			<div class="tempdescribe" style="display:none;"></div>
+			<div class="tempurltype" style="display:none;">0</div>
+			<div class="tempoutsideurl" style="display:none;"></div>
+			<div class="tempshopid" style="display:none;">0</div>
+			<div class="tempshoptype" style="display:none;">0</div>
+			<div class="clear"></div>
+			<div class="contrlface" style="display: none;">
+				<a href="javascript:void(0);" class="faceedit">编辑</a>
+				<a href="javascript:void(0);" onclick="mnewsdelete(this)">删除</a>
+			</div>
+		</div>
+		<div id="endface" title="点击添加图文">
+			<img src="/static/img/cface.jpg">
+		</div>
+	</div>
+	<span id="fingerface"></span>
+	<div id="o_right">
+		<div class="appmsg_edit_item">
+			<label for="otitle"><strong>标题</strong></label>
+			<input id="otitle" type="text" name="title">
+		</div>
+		<div class="appmsg_edit_item">
+			<label for="" class="labletitle"><strong>封面</strong><span id="imgsize">(大图片建议尺寸：360像素 * 200像素)</span></label>
+			<div class="oinput">
+				<form style="display:none;"></form>
+				<form action="/autoreply/uploadtemp.html" enctype="multipart/form-data" method="post">
+					<input type="file" id="ofm" name="surface">
+				</form>
+			</div>
+		</div>
+		<div class="appmsg_edit_item">
+			<label for="" class="labletitle"><strong>摘要</strong><span></span></label>
+			<textarea name="describe" id="describe" style="width:400px;height:100px;"></textarea>
+		</div>
+		<div class="appmsg_edit_item">
+			<label for="" class="labletitle"><strong>链接类型</strong><span></span></label>
+			<select name="urltype" id="urltype">
+				<option value="0" class="outsideoption">素材链接</option>
+				<option value="1" id="outsideoption" class="outsideoption">外部链接</option>
+				<option value="2" id="shopidoption" class="outsideoption">店铺链接</option>
+				<option value="3" id="shoptypeoption" class="outsideoption">店铺分类链接</option>
+			</select>
+		</div>
+		<div class="appmsg_edit_item" id="outsideurlbox" style="display:none;">
+			<label for="" class="labletitle"><strong>外部链接url（链接类型为外部链接时有效）</strong><span></span></label>
+			<input type="text" name="outside_url" id="outside_url" style="width:400px;"><br>
+			<span style="color:red">(*外部链接url建议写全(包括前面的协议,比如http协议),如http://www.lewaimai.com)</span><br>
+		</div>
+		<div class="appmsg_edit_item" id="shopidbox" style="display:none;">
+			<label for="" class="labletitle"><strong>店铺名（链接类型为店铺链接时有效）</strong><span style="color:red;"></span></label>
+			<select name="shop_id" id="shop_id">
+						</select>
+		</div>
+		<div class="appmsg_edit_item" id="shoptypebox" style="display:none;">
+			<label for="" class="labletitle"><strong>店铺分类名（链接类型为店铺分类链接时有效）</strong><span style="color:red;"></span></label>
+			<select name="shop_type" id="shop_type">
+						</select>
+		</div>		
+		
+		<div class="appmsg_edit_item" id="newsconetentbox" style="display:block;">
+			<label for="" class="labletitle"><strong>内容</strong><span></span></label>
+			<form>
+<!-- fck  -start -->
+<link rel="stylesheet" type="text/css" href="/public/fck/editor/themes/default/default.css">
+<style>
+	.ke-dialog-body textarea, 
+	.ke-dialog-body input[type="text"], 
+	.ke-dialog-body input[type="password"], 
+	.ke-dialog-body input[type="datetime"], 
+	.ke-dialog-body input[type="datetime-local"], 
+	.ke-dialog-body input[type="date"], 
+	.ke-dialog-body input[type="month"], 
+	.ke-dialog-body input[type="time"], 
+	.ke-dialog-body input[type="week"], 
+	.ke-dialog-body input[type="number"], 
+	.ke-dialog-body input[type="email"], 
+	.ke-dialog-body input[type="url"], 
+	.ke-dialog-body input[type="search"], 
+	.ke-dialog-body input[type="tel"], 
+	.ke-dialog-body input[type="color"]{
+		border-radius:0!important;
+		color:#858585;
+		background-color:#fff;
+		border:1px solid #d5d5d5;
+		padding:1px 1px;
+		line-height:1.2;
+		font-size:6px;
+		font-family:inherit;
+		-webkit-box-shadow:none!important;
+		box-shadow:none!important;
+		-webkit-transition-duration:.1s;
+		transition-duration:.1s;
+	}
+</style>
+<script type="text/javascript" charset="utf-8" src="/public/fck/editor/kindeditor-min.js?v=201308301730"></script>
+<script type="text/javascript" charset="utf-8" src="/public/fck/editor/lang/zh_CN.js?v=201308301730"></script>
+<script type="text/javascript">
+var editor;
+KindEditor.ready(function(K) {
+	
+	var width = $('textarea[name=content]').css('width');
+	var height = $('textarea[name=content]').css('height');
+	editor = K.create('textarea[name="content"]', {
+		cssPath : '/public/fck/editor/plugins/code/prettify.css',
+		uploadJson : '/public/fck/editor/php/upload_json.php?dir=file',
+		fileManagerJson : '/public/fck/editor/php/file_manager_json.php',
+		allowFileManager : false,
+		width : width,
+		height : height,
+		items : [
+		         'undo', 'redo', '|', 'preview','cut', 'copy', 'paste',
+		         'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+		         'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+		         'superscript','/',
+		         'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+		         'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+		         'table', 'hr', 'emoticons', 'baidumap', 'link', 'unlink',
+		],
+		afterBlur: function(){this.sync();}
+	});
+	K('input[name=setHtml]').click(function(e) {
+		editor.html($('#con').html());
+	});
+	//prettyPrint();
+});
+</script>
+<script type="text/javascript" src="/js/mnews.js?v=20140405"></script>
+<!-- fck end -->
+				<div class="ke-container ke-container-default" style="width: 650px;"><div style="display:block;" class="ke-toolbar" unselectable="on"><span class="ke-outline" data-name="undo" title="后退(Ctrl+Z)" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-undo" unselectable="on"></span></span><span class="ke-outline" data-name="redo" title="前进(Ctrl+Y)" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-redo" unselectable="on"></span></span><span class="ke-inline-block ke-separator"></span><span class="ke-outline" data-name="preview" title="预览" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-preview" unselectable="on"></span></span><span class="ke-outline" data-name="cut" title="剪切(Ctrl+X)" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-cut" unselectable="on"></span></span><span class="ke-outline" data-name="copy" title="复制(Ctrl+C)" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-copy" unselectable="on"></span></span><span class="ke-outline" data-name="paste" title="粘贴(Ctrl+V)" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-paste" unselectable="on"></span></span><span class="ke-outline" data-name="plainpaste" title="粘贴为无格式文本" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-plainpaste" unselectable="on"></span></span><span class="ke-outline" data-name="wordpaste" title="从Word粘贴" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-wordpaste" unselectable="on"></span></span><span class="ke-inline-block ke-separator"></span><span class="ke-outline" data-name="justifyleft" title="左对齐" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-justifyleft" unselectable="on"></span></span><span class="ke-outline" data-name="justifycenter" title="居中" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-justifycenter" unselectable="on"></span></span><span class="ke-outline" data-name="justifyright" title="右对齐" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-justifyright" unselectable="on"></span></span><span class="ke-outline" data-name="justifyfull" title="两端对齐" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-justifyfull" unselectable="on"></span></span><span class="ke-outline" data-name="insertorderedlist" title="编号" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-insertorderedlist" unselectable="on"></span></span><span class="ke-outline" data-name="insertunorderedlist" title="项目符号" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-insertunorderedlist" unselectable="on"></span></span><span class="ke-outline" data-name="indent" title="增加缩进" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-indent" unselectable="on"></span></span><span class="ke-outline" data-name="outdent" title="减少缩进" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-outdent" unselectable="on"></span></span><span class="ke-outline" data-name="subscript" title="下标" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-subscript" unselectable="on"></span></span><span class="ke-outline" data-name="superscript" title="上标" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-superscript" unselectable="on"></span></span><div class="ke-hr"></div><span class="ke-outline" data-name="formatblock" title="段落" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-formatblock" unselectable="on"></span></span><span class="ke-outline" data-name="fontname" title="字体" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-fontname" unselectable="on"></span></span><span class="ke-outline" data-name="fontsize" title="文字大小" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-fontsize" unselectable="on"></span></span><span class="ke-inline-block ke-separator"></span><span class="ke-outline" data-name="forecolor" title="文字颜色" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-forecolor" unselectable="on"></span></span><span class="ke-outline" data-name="hilitecolor" title="文字背景" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-hilitecolor" unselectable="on"></span></span><span class="ke-outline" data-name="bold" title="粗体(Ctrl+B)" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-bold" unselectable="on"></span></span><span class="ke-outline" data-name="italic" title="斜体(Ctrl+I)" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-italic" unselectable="on"></span></span><span class="ke-outline" data-name="underline" title="下划线(Ctrl+U)" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-underline" unselectable="on"></span></span><span class="ke-outline" data-name="strikethrough" title="删除线" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-strikethrough" unselectable="on"></span></span><span class="ke-outline" data-name="lineheight" title="行距" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-lineheight" unselectable="on"></span></span><span class="ke-outline" data-name="removeformat" title="删除格式" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-removeformat" unselectable="on"></span></span><span class="ke-inline-block ke-separator"></span><span class="ke-outline" data-name="image" title="图片" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-image" unselectable="on"></span></span><span class="ke-outline" data-name="table" title="表格" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-table" unselectable="on"></span></span><span class="ke-outline" data-name="hr" title="插入横线" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-hr" unselectable="on"></span></span><span class="ke-outline" data-name="emoticons" title="插入表情" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-emoticons" unselectable="on"></span></span><span class="ke-outline" data-name="baidumap" title="百度地图" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-baidumap" unselectable="on"></span></span><span class="ke-outline" data-name="link" title="超级链接" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-link" unselectable="on"></span></span><span class="ke-outline" data-name="unlink" title="取消超级链接" unselectable="on"><span class="ke-toolbar-icon ke-toolbar-icon-url ke-icon-unlink" unselectable="on"></span></span></div><div style="display: block; height: 238px;" class="ke-edit"><iframe class="ke-edit-iframe" hidefocus="true" frameborder="0" tabindex="" style="width: 100%; height: 238px;"></iframe><textarea class="ke-edit-textarea" hidefocus="true" tabindex="" style="width: 100%; height: 238px; display: none;"></textarea></div><div class="ke-statusbar"><span class="ke-inline-block ke-statusbar-center-icon"></span><span class="ke-inline-block ke-statusbar-right-icon"></span></div></div><textarea style="width: 400px; height: 300px; display: none;" name="content" id="content">				</textarea>
+				<input type="submit" style="display:none">
+			</form>
+		</div>
+		<div class="appmsg_edit_item">
+		
+		</div>
+	</div>
+	
+	<div id="o_bottom">
+		<span class="o_save" tage="1">保存</span>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="baseurl" style="display:none;"></div>
+<div id="sonfacehtml" style="display:none;">
+		<div class="sonface">
+			<div class="facecentent">
+				标题
+			</div>
+			<img src="/img/news/sonface.jpg" class="faceimg" rel="">
+			<div class="clear"></div>
+			<div class="tempcontent" style="display:none;"></div>
+			<div class="tempdescribe" style="display:none;"></div>
+			<div class="tempurltype" style="display:none;">0</div>
+			<div class="tempoutsideurl" style="display:none;"></div>
+			<div class="tempshopid" style="display:none;">0</div>
+			<div class="tempshoptype" style="display:none;">0</div>
+			<div class="contrlface" style="display: none;">
+				<a href="javascript:void(0);" class="faceedit">编辑</a>
+				<a href="javascript:void(0);" onclick="mnewsdelete(this)">删除</a>
+			</div>
+		</div>
+</div>
+</div>
+</div><!-- form -->	</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+		$(function(){
+			showalert();
+			window.setInterval(showalert, 30000);
+		})
+		
+		function closeoa(){
+			$("#orderAlert").slideUp();
+			stopFlash();
+		}
+		
+		function tourl(){
+			location.href="/order/viewopen.html";
+		}
+		
+		function showalert() {
+			var initTime = "1397540467";
+			var url = "/order/getneworder.html"+"?initTime="+initTime;
+			$.get(url,function(data){
+				var list = data.split(":::");
+				$("#oantnum").html(list[1]);
+				if(list[0] > 0){
+					var nowDate = new Date();
+					var str = nowDate.getFullYear()+"-"+(nowDate.getMonth() + 1)+"-"+nowDate.getDate()+" "+nowDate.getHours()+":"+nowDate.getMinutes()+":"+nowDate.getSeconds();
+					$("#oanum").html(list[0]);
+					$("#oatnum").html(list[1]);
+					$("#oatime").html(str);
+					$("#orderAlert").slideUp();
+					$("#orderAlert").slideDown();
+					$("#soundsw").show(1000,function(){
+						$("#soundsw").html('<embed src="/music/dingdong.wav" loop="0" autostart="true"></embed>');
+						$("#soundsw").hide();
+					});
+					flashTitle("您有"+list[0]+"笔新订单");
+				}
+			});
+		}
+		
+	    var flashTitlePlayer = {
+	        start: function (msg) {
+	            this.title = document.title;
+	            if (!this.action) {
+	                try {
+	                    this.element = document.getElementsByTagName('title')[0];
+	                    this.element.innerHTML = this.title;
+	                    this.action = function (ttl) {
+	                        this.element.innerHTML = ttl;
+	                    };
+	                } catch (e) {
+	                    this.action = function (ttl) {
+	                        document.title = ttl;
+	                    }
+	                    delete this.element;
+	                }
+	                this.toggleTitle = function () {
+	                    this.action('【' + this.messages[this.index = this.index == 0 ? 1 : 0] + '】乐外卖');
+	                };
+	            }
+	            this.messages = [msg];
+	            var n = msg.length;
+	            var s = '';
+	            if (this.element) {
+	                var num = msg.match(/\w/g);
+	                if (num != null) {
+	                    var n2 = num.length;
+	                    n -= n2;
+	                    while (n2 > 0) {
+	                        s += " ";
+	                        n2--;
+	                    }
+	                }
+	            }
+	            while (n > 0) {
+	                s += '　';
+	                n--;
+	            };
+	            this.messages.push(s);
+	            this.index = 0;
+	            this.timer = setInterval(function () {
+	                flashTitlePlayer.toggleTitle();
+	            }, 2000);
+	        },
+	        stop: function () {
+	            if (this.timer) {
+	                clearInterval(this.timer);
+	                this.action(this.title);
+	                delete this.timer;
+	                delete this.messages;
+	            }
+	        }
+	    };
+	    function flashTitle(msg) {
+	        flashTitlePlayer.start(msg);
+	    }
+	    function stopFlash() {
+	        flashTitlePlayer.stop();
+	    }
+	</script>
+
+{% endblock %}
+

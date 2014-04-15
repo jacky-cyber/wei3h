@@ -2,10 +2,13 @@
 
 from flask import Blueprint, request, make_response, render_template, flash, g, session, redirect, url_for
 
-from app import db
+from app import db as mdb
 from app.zaiwenling.forms import MusicForm
 from app.zaiwenling.models import Music
 
+from app.wechat.models import Follower
+
+from ..utils.wechat import add_follower, delete_follower, update_follower
 from ..wpi.api import *
 
 mod = Blueprint('zaiwenling', __name__, url_prefix='/zaiwenling')
@@ -28,8 +31,8 @@ def add_music():
 
         music = Music(music_title=form.music_title.data, music_artist=form.music_artist.data, music_pic=form.music_pic.data, music_audio=form.music_audio.data)
 
-        db.session.add(music)
-        db.session.commit()
+        mdb.session.add(music)
+        mdb.session.commit()
 
         return redirect(url_for('zaiwenling.list_music'))
     return render_template('zaiwenling/add_music.html', form=form)
@@ -112,6 +115,7 @@ def wechat_api(token):
 
         ToUserName = message['ToUserName']
         FromUserName = message['FromUserName']
+        CreateTime = message['CreateTime']
         msgtype = message.get('MsgType', '')
 
         s = '''
@@ -134,6 +138,11 @@ def wechat_api(token):
             '''
 
         r = ''
+
+        if Follower.query.filter_by(wxid=ToUserName, openid=FromUserName).count() == 0:
+            add_follower(ToUserName, FromUserName, CreateTime, CreateTime)
+        else:
+            update_follower(ToUserName, FromUserName, CreateTime)
 
         if msgtype == 'event' and message.get('Event', '') == 'subscribe':
             r = reply('text', s, ToUserName, FromUserName)

@@ -1,0 +1,51 @@
+{% extends "dashboard_admin_base.html" %}
+
+{% block breadcrumb %}
+<li>
+	<a href="#">微官网</a>
+</li>
+
+<li class="active">页面管理</li>
+
+{% endblock %}
+
+{% block content %}
+
+<form method="POST" action="" class="form">
+
+
+  <div class="form-group">
+    <label for="">关键字</label>
+    <input type="text" name="keyword" class="form-control" placeholder="关键字" required autofocus value="{{ functiontext.keyword }}">
+  </div>
+
+  <div class="form-group">
+		<label class="control-label">匹配类型</label>
+
+		<div class="radio">
+			<label>
+				<input name="ptype" type="radio" class="ace" value="0" checked="true">
+				<span class="lbl"> 完全匹配</span>
+			</label>
+		</div>
+
+<!--
+		<div class="radio">
+			<label>
+				<input name="ptype" type="radio" class="ace" value="1">
+				<span class="lbl"> 包含匹配</span>
+			</label>
+		</div> -->
+	</div>
+
+  <div class="form-group">
+    <label for="">回答</label>
+    <textarea class="form-control limited" name="content" maxlength="140" required >{{ functiontext.content }}</textarea>
+  </div>
+
+
+
+  <button type="submit" class="btn btn-default">保存</button>
+</form>
+
+{% endblock %}

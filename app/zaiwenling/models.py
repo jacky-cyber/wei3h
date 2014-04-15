@@ -10,7 +10,7 @@ class Music(db.Model):
     music_title = db.Column(db.String(50))
     music_artist = db.Column(db.String(50))
     music_pic = db.Column(db.String(120))
-    music_audio = db.Column(db.String(120))
+    music_audio = db.Column(db.String(512))
 
     def __init__(self, music_title=None, music_artist=None, music_pic=None, music_audio=None):
         self.music_title = music_title
