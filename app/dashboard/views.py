@@ -3,6 +3,7 @@
 import datetime
 import os
 import hashlib
+import json
 from werkzeug.utils import secure_filename
 
 from flask import Blueprint, request, current_app, render_template, flash, g, session, redirect, url_for, abort
@@ -244,7 +245,7 @@ def weshop_index_navs():
 @mod.route('/weshop/index/pages/')
 @require_login
 def weshop_index_pages():
-    pages = db.shopages.find({'wxuser_id': g.wxuser.id}).sort('rate')
+    pages = db.shopages.find({'wxuser_id': g.wxuser.id})
 
     return render_template('dashboard/weshop_index_pages.html', wxuser=g.wxuser, pages=pages)
 
@@ -253,12 +254,59 @@ def weshop_index_pages():
 def add_weshopage():
     form = request.form
 
+    wxuser_id = g.wxuser.id
+    shop_id = str(db.shop.find_one({'wxuser_id': wxuser_id})['_id'])
+
+    if request.method == 'POST':
+        pagename = form['pagename']
+        content = form['content']
+        d = {'content': content}
+        pageid = str(db.ueditor.save(d))
+        d = {'wxuser_id': wxuser_id, 'shop_id': shop_id,\
+        'pagename': pagename, 'url': pageid,\
+        'created': str(datetime.date.today())}
+        db.shopages.insert(d)
+        return redirect(url_for('dashboard.weshop_index_pages'))
+    return render_template('dashboard/add_weshopage.html', wxuser=g.wxuser)
+
+@mod.route('/editweshopage/<id>', methods=['GET', 'POST'])
+@require_login
+def edit_weshopage(id=''):
+    shopage = db.shopages.find_one({'_id': ObjectId(id)}, {'_id': 0})
+    pageid = shopage['url']
+    content = db.ueditor.find_one({'_id': ObjectId(pageid)})['content']
+
+    shopage['content'] = content
+
+    if shopage is None:
+        abort(404)
+
     if request.method == 'POST':
 
-        pass
-    return render_template('dashboard/add_weshopage.html', form=form, wxuser=g.wxuser)
+        form = request.form
+
+        pagename = form['pagename']
+        content = form['content']
 
 
+        db.shopages.update({'_id': ObjectId(id)}, {'$set': {'pagename': pagename}})
+        db.ueditor.update({'_id': ObjectId(pageid)}, {'$set': {'content': content}})
+
+        flash('修改成功 ', 'success')
+        return redirect(url_for('dashboard.weshop_index_pages'))
+    return render_template('dashboard/add_weshopage.html', wxuser=g.wxuser, shopage=shopage)
+
+@mod.route('/delweshopage/<id>', methods=['GET', 'POST'])
+@require_login
+def del_weshopage(id=''):
+    shopage = db.shopages.find_one({'_id': ObjectId(id)}, {'_id': 0})
+    pageid = shopage['url']
+
+    db.ueditor.remove({'_id': ObjectId(pageid)})
+    db.shopages.remove({'_id': ObjectId(id)})
+
+    flash('删除成功 ', 'success')
+    return redirect(url_for('dashboard.weshop_index_pages'))
 
 
 
@@ -269,7 +317,7 @@ def allowed_file(filename):
 @mod.route('/uploads', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        file = request.files['file']
+        file = request.files['upfile']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
 
@@ -278,17 +326,16 @@ def upload_file():
                 ptype = 'pic'
 
             file.save(os.path.join(current_app.config['UPLOAD_FOLDER']+'/'+ptype, '_' + str(g.user.id) + '_' + filename))
-
-            filepage = Filepage(ptype=ptype, filename=filename, url='/static/uploads/' + ptype + '/_' + str(g.user.id) + '_' + filename)
+            url = '/static/uploads/' + ptype + '/_' + str(g.user.id) + '_' + filename
+            filepage = Filepage(ptype=ptype, filename=filename, url=url)
             filepage.save()
-            flash('上传成功 ', 'success')
-            return redirect(url_for('dashboard.filepage_pics'))
+            return json.dumps({'original': filename, 'url': '/_' + str(g.user.id) + '_' + filename, 'state':'SUCCESS'})
     return '''
     <!doctype html>
     <title>Upload new File</title>
     <h1>Upload new File</h1>
     <form action="" method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
+      <p><input type=file name=upfile>
          <input type=submit value=Upload>
     </form>
     '''

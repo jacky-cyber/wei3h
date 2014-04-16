@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for
+from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for, abort
 
 
 mod = Blueprint('weigou', __name__, url_prefix='/weigou')
@@ -25,3 +25,17 @@ def homepage():
     shopics = db.shopics.find({'shop_id': str(shop['_id'])}).sort('rate')
 
     return render_template('weigou/homepage.html', shop=shop, shopics=shopics)
+
+@mod.route('/pages')
+def pages():
+    token = request.args.get('token', '')
+    pageid = request.args.get('pageid', '')
+
+    shopage = db.shopages.find_one({'shop_id': token, '_id': ObjectId(pageid)})
+    if shopage is None:
+        abort(404)
+
+    url = shopage.get('url', '')
+    content = db.ueditor.find_one({'_id': ObjectId(url)})['content']
+
+    return content

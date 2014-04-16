@@ -13,7 +13,6 @@
 	<p><a href="{{ url_for('dashboard.add_weshopage') }}" class="btn btn-info">添加</a></p>
 </div>
 
-
 <div class="col-xs-12">
 	<div class="table-responsive">
 		<table id="sample-table-1" class="table table-striped table-bordered table-hover">
@@ -30,21 +29,30 @@
 			</thead>
 
 			<tbody>
-			{% if pages %}
-				<tr><td colspan="5" class="empty"><span class="empty">没有找到数据.</span></td></tr>
-			{% else %}
 			{% for page in pages %}
 				<tr>
 					<td class="center">
 						{{ loop.index }}
 					</td>
 					<td>{{ page.pagename }}</td>
-					<td>{{ page.url }}</td>
+					<td><a href="{{ 'http://127.0.0.1:5000/weigou/pages?token='+page.shop_id+'&pageid='+page._id|string() }}" target="_blank">{{ 'http://127.0.0.1:5000/weigou/pages?token='+page.shop_id+'&pageid='+page._id|string() }}</a></td>
 					<td>{{ page.created }}</td>
+					<td>
+						<div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+
+							<a class="btn btn-xs btn-info" href="{{ url_for('dashboard.edit_weshopage', id=page._id) }}">
+								<i class="icon-edit bigger-120"></i>
+							</a>
+
+							<a class="btn btn-xs btn-danger" href="{{ url_for('dashboard.del_weshopage', id=page._id) }}">
+								<i class="icon-trash bigger-120"></i>
+							</a>
+
+						</div>
+					</td>
 
 				</tr>
 				{% endfor %}
-			{% endif %}
 			</tbody>
 		</table>
 	</div><!-- /.table-responsive -->
